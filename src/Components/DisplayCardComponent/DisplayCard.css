@@ -1,0 +1,77 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.card img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+/* .card img:empty {
+  display: none;
+} */
+
+.card h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.card .rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.card .rating span {
+  margin-right: 8px;
+}
+
+.card .badge {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.card .badge img {
+  height: 20px;
+  width: 20px;
+  margin-right: 8px;
+}
+
+.card .cuisine {
+  margin-bottom: 8px;
+}
+
+.card .address,
+.card .phone {
+  margin-bottom: 8px;
+}
+
+.card .buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background-color: #0056b3;
+}
