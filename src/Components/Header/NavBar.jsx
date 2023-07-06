@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./NavBar.css";
-import { SideBar } from "../SideBar/SideBar";
+import { Profile } from "../Profile/Profile";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
@@ -127,7 +127,7 @@ export const NavBar = ({
                 </div>
               </li>
               <li>
-                <SideBar
+                <Profile
                   handleGetItinerary={handleGetItinerary}
                   setActiveComponent={setActiveComponent}
                 />

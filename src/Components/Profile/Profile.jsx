@@ -5,7 +5,7 @@ import { Avatar } from "primereact/avatar";
 import { Dialog } from "primereact/dialog";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
-import "./SideBar.css";
+import "./Profile.css";
 
 class RegisterModel {
   constructor() {
@@ -26,7 +26,7 @@ class RegisterModel {
     this.accessFailedCount = 0;
   }
 }
-export const SideBar = ({ handleGetItinerary, setActiveComponent }) => {
+export const Profile = ({ handleGetItinerary, setActiveComponent }) => {
   const [visibleRight, setVisibleRight] = useState(false);
   const [visibleLogin, setVisibleLogin] = useState(false);
   const [visibleRegister, setVisibleRegister] = useState(false);
@@ -34,6 +34,7 @@ export const SideBar = ({ handleGetItinerary, setActiveComponent }) => {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [message, setMessage] = useState("");
+
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn")
   );
