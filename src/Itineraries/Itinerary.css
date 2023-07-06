@@ -1,11 +1,15 @@
 .myFlex {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
-.Spacing {
+.myFlexItem {
+  margin: 10px;
+}
+
+.titleBar {
   justify-content: space-between;
 }
 

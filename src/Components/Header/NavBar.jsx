@@ -14,78 +14,6 @@ export const NavBar = ({
   handleGetItinerary,
   setActiveComponent,
 }) => {
-  const [visible, setVisible] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem("isLoggedIn")
-  );
-  const handleLogin = async (e) => {
-    const url = "https://localhost:7142/api/auth/login";
-
-    const loginModel = {
-      email,
-      password,
-    };
-
-    try {
-      // Send a POST request to the API
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(loginModel),
-      });
-
-      const data = await response.json();
-      console.log(data.token);
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("isLoggedIn", true);
-      setMessage("Login successful!");
-    } catch (error) {
-      console.error("Error:", error);
-      setMessage("Login failed. Please try again." + error);
-    }
-  };
-
-  const handleClick = () => {
-    setVisible(true);
-  };
-
-  const handleLogout = async () => {
-    const url = "https://localhost:7142/api/auth/logout";
-
-    try {
-      // Send a POST request to the API
-      const response = await fetch(url, {
-        method: "POST",
-      });
-
-      // Clear the token and logged-in status from local storage
-      localStorage.removeItem("token");
-      localStorage.removeItem("isLoggedIn");
-      setIsLoggedIn(false);
-      setActiveComponent("HomePage");
-      // Display a message indicating successful logout
-      // setMessage("Logout successful!");
-    } catch (error) {
-      console.error("Error:", error);
-      // setMessage("Logout failed. Please try again." + error);
-    }
-  };
-
-  const footerContent = (
-    <div>
-      <Button
-        label="Login"
-        onClick={handleLogin}
-        className="p-button-text custom-button-label"
-        style={{ color: "#333" }}
-      />
-    </div>
-  );
   return (
     <>
       <div className="header">
@@ -98,12 +26,15 @@ export const NavBar = ({
               <a href="/">Home</a>
             </li>
             <li>
+              <a href="/">Rural</a>
+            </li>
+            <li>
               <a href="./Homepage#about">About</a>
             </li>
             <li>
               <a href="/">Contact</a>
             </li>
-            {!isLoggedIn && (
+            {/* {!isLoggedIn && (
               <li>
                 <div className="card flex justify-content-center">
                   <a href="#" onClick={handleClick}>
@@ -156,7 +87,7 @@ export const NavBar = ({
               <li>
                 <a href="/">Signup</a>
               </li>
-            )}
+            )} */}
           </ul>
           {/* <form className="Search">
             <input
@@ -196,12 +127,10 @@ export const NavBar = ({
                 </div>
               </li>
               <li>
-                {isLoggedIn && (
-                  <SideBar
-                    handleLogout={handleLogout}
-                    handleGetItinerary={handleGetItinerary}
-                  />
-                )}
+                <SideBar
+                  handleGetItinerary={handleGetItinerary}
+                  setActiveComponent={setActiveComponent}
+                />
               </li>
             </ul>
           </div>

@@ -173,7 +173,7 @@ export const Itinerary = ({
 
   return (
     <div style={{ margin: "70px" }}>
-      <div className="myFlex Spacing">
+      <div className="myFlex titleBar">
         <h1 style={{ textAlign: "center" }}>Your Trips</h1>
         <Button
           label="Add"
@@ -192,9 +192,12 @@ export const Itinerary = ({
         )}
       </div>
       <hr></hr>
-      <div style={{ margin: "10px" }} className="myFlex">
+      <div className="myFlex">
         {data.map((d) => (
-          <div key={d.id} className="card flex justify-content-center">
+          <div
+            key={d.id}
+            className="card flex justify-content-center myFlexItem"
+          >
             <Card
               title={d.name}
               subTitle={
@@ -214,7 +217,11 @@ export const Itinerary = ({
                   <img
                     alt="Card"
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCWOMrdSF3wCnuLdx9v-Elps8-3mbwvpffHg&usqp=CAU"
-                    style={{ height: "100px", width: "300px" }}
+                    style={{
+                      height: "100px",
+                      width: "300px",
+                      borderRadius: "5px",
+                    }}
                   />
                   <Button
                     label=""

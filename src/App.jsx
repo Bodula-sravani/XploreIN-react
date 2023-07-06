@@ -16,7 +16,9 @@ function App() {
 
   const handleDestinationSearch = (e) => {
     e.preventDefault();
-    setActiveComponent("Destinantion");
+    if (search !== "") {
+      setActiveComponent("Destinantion");
+    }
   };
 
   const handleGetItinerary = async () => {
