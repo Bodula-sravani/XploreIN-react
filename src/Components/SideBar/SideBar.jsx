@@ -288,8 +288,6 @@ export const SideBar = ({ handleGetItinerary, setActiveComponent }) => {
                 My itineraries
               </button>
               <hr />
-              <button onClick={handlePostsClick}>My posts</button>
-              <hr />
               <button onClick={handleLogoutClick}>Log out</button>
               <hr />
             </ul>

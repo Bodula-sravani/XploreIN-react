@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DisplayCard from "../DisplayCardComponent/DisplayCard";
-import Slider from "@mui/material/Slider";
-import Box from "@mui/material/Box";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { height } from "@mui/system";
 
 export const GetLocationResturants = ({ type, lat, lon }) => {
   const [places, setPlaces] = useState([]);
@@ -34,8 +31,6 @@ export const GetLocationResturants = ({ type, lat, lon }) => {
   }, [lat, lon]);
   console.log("type");
   console.log(type);
-  console.log(lat);
-  console.log(lon);
   console.log("result");
   console.log(places);
 

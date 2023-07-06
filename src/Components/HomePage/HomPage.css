@@ -1,0 +1,23 @@
+#about {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.Motto {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  text-align: justify;
+  margin: 10px;
+}
+
+.MottoImage {
+  display: flex;
+  width: 500px;
+  height: 500px;
+  background: url("https://images.unsplash.com/photo-1585135468269-bd3747577424?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW5kaWFuJTIwYmVhdXR5fGVufDB8fDB8fHww&w=1000&q=80");
+  background-size: 500px;
+  border-radius: 20px;
+}

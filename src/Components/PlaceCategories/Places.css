@@ -1,17 +1,24 @@
+.myCarousel {
+  justify-content: space-evenly;
+}
+
 .root {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .Places {
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px;
   width: 500px;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .Place {
@@ -20,11 +27,13 @@
   justify-content: center;
   align-items: center;
   width: 300px;
-  height: 300px;
+  height: 200px;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
+  background-position: center;
   text-align: center;
   border-radius: 10px;
+  margin: 10px;
 }
 .Place:hover {
   background-size: 200%;

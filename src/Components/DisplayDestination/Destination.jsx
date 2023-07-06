@@ -31,19 +31,11 @@
 
 import { React, useEffect, useState, Fragment } from "react";
 import { GetLocationData } from "../Api/GetLocationDetails";
-import { GetLocationResturants } from "../Api/GetLocationResturants";
+import { GetLocationResturants } from "../Api/GetLocationData";
 
 export const Destination = ({ search }) => {
   const [locationData, setLocationData] = useState(null);
-  const types = ["attractions", "restaurants", "hotels"];
-  console.log("search::: " + search);
-  console.log("loc dta");
-  console.log(locationData);
-
-  // useEffect(() => {
-  //   // Call the GetLocationData component here
-  //   GetLocationData({ location: search, setLocationData: setLocationData });
-  // }, [search, setLocationData]);
+  const types = ["restaurants", "attractions", "hotels"];
 
   return (
     <>

@@ -26,7 +26,7 @@ export const NavBar = ({
               <a href="/">Home</a>
             </li>
             <li>
-              <a href="/">Rural</a>
+              <a href="./HomePage#India">India</a>
             </li>
             <li>
               <a href="./Homepage#about">About</a>
