@@ -20,7 +20,7 @@ export const SideBar = ({ handleLogout, handleGetItinerary }) => {
       {/* <Button icon="pi pi-arrow-left" onClick={() => setVisibleRight(true)} /> */}
       <Avatar
         icon="pi pi-user"
-        style={{ backgroundColor: "#9c27b0", color: "#ffffff" }}
+        style={{ backgroundColor: "transparent", color: "black" }}
         shape="circle"
         onClick={() => setVisibleRight(true)}
       />

@@ -172,7 +172,7 @@ export const Itinerary = ({
   };
 
   return (
-    <div style={{ margin: "10px" }}>
+    <div style={{ margin: "70px" }}>
       <div className="myFlex Spacing">
         <h1 style={{ textAlign: "center" }}>Your Trips</h1>
         <Button

@@ -19,58 +19,60 @@ export const GetLocationData = ({ location, setLocationData }) => {
   console.log("location: " + location);
   useEffect(() => {
     const fetchData = async () => {
-      const url = `https://travel-advisor.p.rapidapi.com/locations/auto-complete?query=${location}&lang=en_US&units=km`;
-      const options = {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Key":
-            "3c310f413bmsh5a73d047bf06250p1848ebjsn54a086f4e0cf",
-          "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
-        },
-      };
+      if (location !== "") {
+        const url = `https://travel-advisor.p.rapidapi.com/locations/auto-complete?query=${location}&lang=en_US&units=km`;
+        const options = {
+          method: "GET",
+          headers: {
+            "X-RapidAPI-Key":
+              "3c310f413bmsh5a73d047bf06250p1848ebjsn54a086f4e0cf",
+            "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
+          },
+        };
 
-      try {
-        const response = await fetch(url, options);
-        const result = await response.json();
+        try {
+          const response = await fetch(url, options);
+          const result = await response.json();
 
-        // Filter results for Indian cities and places
-        const indianResults = result.data.filter((item) => {
-          const locationString = item.result_object.location_string;
-          const ancestors = item.result_object.ancestors;
+          // Filter results for Indian cities and places
+          const indianResults = result.data.filter((item) => {
+            const locationString = item.result_object.location_string;
+            const ancestors = item.result_object.ancestors;
 
-          // Check if the location_string or ancestors contain references to India
-          return (
-            locationString.includes("India") ||
-            ancestors.some((ancestor) => ancestor.name.includes("India"))
-          );
-        });
-        // Extract desired information from the first result
-        const {
-          name,
-          photo,
-          description,
-          parent_display_name,
-          latitude,
-          longitude,
-        } = indianResults[0].result_object;
+            // Check if the location_string or ancestors contain references to India
+            return (
+              locationString.includes("India") ||
+              ancestors.some((ancestor) => ancestor.name.includes("India"))
+            );
+          });
+          // Extract desired information from the first result
+          const {
+            name,
+            photo,
+            description,
+            parent_display_name,
+            latitude,
+            longitude,
+          } = indianResults[0].result_object;
 
-        // Set the data state variable
-        setDataFetched({
-          name,
-          photo,
-          description,
-          parent_display_name,
-          latitude,
-          longitude,
-        });
+          // Set the data state variable
+          setDataFetched({
+            name,
+            photo,
+            description,
+            parent_display_name,
+            latitude,
+            longitude,
+          });
 
-        console.log("data fectehc");
-        console.log(dataFetched);
+          console.log("data fectehc");
+          console.log(dataFetched);
 
-        setLocationData({ name, latitude, longitude });
-        setIsLoading(false);
-      } catch (error) {
-        console.error(error);
+          setLocationData({ name, latitude, longitude });
+          setIsLoading(false);
+        } catch (error) {
+          console.error(error);
+        }
       }
     };
 

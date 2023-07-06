@@ -100,6 +100,9 @@ export const NavBar = ({
             <li>
               <a href="./Homepage#about">About</a>
             </li>
+            <li>
+              <a href="/">Contact</a>
+            </li>
             {!isLoggedIn && (
               <li>
                 <div className="card flex justify-content-center">
@@ -168,15 +171,27 @@ export const NavBar = ({
           <div className="lastitem">
             <ul>
               <li>
-                <div className="p-inputgroup" style={{ width: "300px" }}>
+                <div
+                  className="p-inputgroup"
+                  style={{
+                    width: "300px",
+                    border: "solid 1px black",
+                    borderRadius: "5px",
+                  }}
+                >
                   <InputText
-                    placeholder="Search"
+                    placeholder="Search destination"
                     onChange={(e) => onSearch(e.target.value)}
                   />
                   <Button
                     icon="pi pi-search"
                     className="searchButton"
                     onClick={(e) => handleDestinationSearch(e)}
+                    style={{
+                      background: "transparent",
+                      border: "none",
+                      color: "black",
+                    }}
                   />
                 </div>
               </li>
