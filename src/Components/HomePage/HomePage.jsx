@@ -22,18 +22,6 @@ export const HomePage = () => {
           Stuff About things in India
         </div>
       </div>
-      {/* <h1>About Us</h1>
-      <div id="about">
-        <div className="Motto">
-          Our motto is Simple
-          <br />
-          India is a place full of heritage, traditions and culture
-          <br />
-          Embracing the origins of it and enjoy its beauty
-          <br /> Come Join us And XploreIN
-        </div>
-        <div className="MottoImage"></div>
-      </div> */}
       <div className="partners">
         <h1>Information partners</h1>
         <p>We get our information from our reliable partners</p>
@@ -56,3 +44,18 @@ export const HomePage = () => {
     </div>
   );
 };
+
+{
+  /* <h1>About Us</h1>
+      <div id="about">
+        <div className="Motto">
+          Our motto is Simple
+          <br />
+          India is a place full of heritage, traditions and culture
+          <br />
+          Embracing the origins of it and enjoy its beauty
+          <br /> Come Join us And XploreIN
+        </div>
+        <div className="MottoImage"></div>
+      </div> */
+}

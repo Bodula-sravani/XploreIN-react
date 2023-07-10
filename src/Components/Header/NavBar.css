@@ -46,16 +46,32 @@
   align-self: flex-end;
 }
 
-.hamburger {
-  display: none;
-  cursor: pointer;
+.inputGroup {
+  width: 300px;
+  border: none;
+  border-radius: 5px;
 }
 
-@media screen and (max-width: 1240px) {
-  .hamburger {
-    display: flex;
-  }
+.searchButton {
+  background: transparent;
+  border: solid 1px black;
+  color: black;
+}
+.searchButton:hover {
+  background: transparent;
+}
 
+.lastitem ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+li {
+  padding: 0 0.2rem;
+}
+
+/* @media screen and (max-width: 1240px) {
   .nav-menu {
     position: absolute;
     flex-direction: column;
@@ -97,59 +113,76 @@
   .p-inputgroup {
     width: 100px;
   }
-}
+} */
 
-.lastitem ul {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
+@media screen and (max-width: 768px) {
+  .header .container {
+    flex-direction: row;
+  }
 
-li {
-  padding: 0 0.2rem;
-}
+  .menu-toggle {
+    display: block;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
 
-.weatherDialogbox {
-  background: url("https://t4.ftcdn.net/jpg/04/97/80/99/360_F_497809944_FMo3DO6j7XSlb9rZKOlnqaaWoJhuZXBm.jpg");
-}
+  .menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: black;
+    margin-bottom: 5px;
+  }
 
-.weather-info {
-  display: flex;
-  flex-direction: column;
-}
-.TodayWeather {
-  display: flex;
-  width: inherit;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
+  .nav-menu {
+    display: none;
+    margin-top: 1rem;
+  }
 
-.weather-icon {
-  width: 100px;
-  height: 100px;
-  border: 5%;
-  border-radius: solid 1px black;
-  margin: 0 auto; /* Add this line to center the image */
-}
+  .nav-menu.active {
+    display: block;
+  }
 
-.temperature,
-.description {
-  font-size: 20px;
-  font-weight: 400;
-  color: black;
-}
+  .nav-menu li {
+    margin-bottom: 1rem;
+  }
 
-.location {
-  font-size: 20px;
-  font-weight: 1000;
-  color: black;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.forecast-container {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  .lastitem ul {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .lastitem ul li {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .inputGroup {
+    width: 100%;
+  }
+
+  .searchInput {
+    width: 100%;
+  }
+
+  .logo {
+    font-size: 20px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+
+    font-style: italic;
+  }
+  .inputGroup {
+    width: 200px;
+    border: none;
+    border-radius: 5px;
+  }
+  .inputGroup ::placeholder {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .profile {
+    font-size: medium;
+  }
 }

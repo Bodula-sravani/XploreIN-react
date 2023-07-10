@@ -1,5 +1,4 @@
 .myCarousel {
-  justify-content: space-evenly;
 }
 
 .imageStyle {
@@ -29,59 +28,17 @@
   right: 10px;
 }
 
-.root {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
+@media (max-width: 768px) {
+  .myCarousel {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
 
-.Places {
-  /* display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
-  width: 500px;
-  justify-content: center;
-  align-items: center; */
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
-
-.Place {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 200px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  text-align: center;
-  border-radius: 10px;
-  margin: 10px;
-}
-.Place:hover {
-  background-size: 200%;
-}
-.Place .text {
-  margin-top: 10px;
-  font-size: 25px;
-  font-style: italic;
-}
-.Hillstations {
-  background: url("https://upload.wikimedia.org/wikipedia/commons/a/ad/Munnar_hillstation_kerala.jpg");
-}
-
-.Beaches {
-  background: url("https://hips.hearstapps.com/hmg-prod/images/champagne-beach-espiritu-santo-island-vanuatu-royalty-free-image-1655672510.jpg?crop=1.00xw:0.755xh;0,0.173xh&resize=1200:*");
-}
-
-.Temples {
-  background: url("https://uttarakhandtourism.gov.in/sites/default/files/2020-09/Kedarnath%20Temple.jpg");
-}
-
-.Urban {
-  background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV9Rg5Xpxydsur5IzlnyeQrbX2zt77cOmVFPUHyDYRRg&usqp=CAU&ec=48600113");
+  .imageStyle {
+    max-width: 100%;
+    max-height: 200px;
+    margin-right: 0; /* Remove margin between images on smaller screens */
+    margin-bottom: 20px; /* Add a margin-bottom for vertical spacing */
+  }
 }
