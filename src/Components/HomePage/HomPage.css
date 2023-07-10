@@ -21,3 +21,23 @@
   background-size: 500px;
   border-radius: 20px;
 }
+
+.partners {
+  background-repeat: no-repeat;
+  background-size: 100% 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.whiteBackground {
+  height: 150px;
+  width: 100%;
+  background: white;
+  border: solid 1px black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

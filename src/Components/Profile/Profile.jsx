@@ -274,7 +274,7 @@ export const Profile = ({ handleGetItinerary, setActiveComponent }) => {
                 </div>
                 <div className="Label">
                   <label htmlFor="password" className="w-24">
-                    Confrim Password
+                    Confirm Password
                   </label>
                   <InputText
                     id="repeatpassword"

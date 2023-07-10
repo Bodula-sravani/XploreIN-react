@@ -2,6 +2,33 @@
   justify-content: space-evenly;
 }
 
+.imageStyle {
+  border-radius: 10px;
+  width: 300px;
+  height: 150px;
+}
+
+.custom-prev-arrow,
+.custom-next-arrow {
+  width: 40px;
+  height: 40px;
+  /* background-color: gray; */
+  opacity: 0.5;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.custom-prev-arrow {
+  left: 10px;
+}
+
+.custom-next-arrow {
+  right: 10px;
+}
+
 .root {
   width: 100%;
   display: flex;
