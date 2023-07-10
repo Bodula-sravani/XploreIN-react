@@ -7,7 +7,6 @@ import { Rating } from "primereact/Rating";
 import { FileUpload } from "primereact/fileupload";
 import { InputText } from "primereact/inputtext";
 import { Card } from "primereact/card";
-
 import "./UserPosts.css";
 
 class MyPostModel {
@@ -44,31 +43,6 @@ export const UserPosts = () => {
   const [userPosts, setUserPosts] = useState(null);
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem("token");
-      const url = `https://localhost:7142/api/UserPosts/${token}`;
-
-      try {
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = await response.json();
-        // Do something with the fetched data
-        // console.log(data);
-        setUserPosts([...data]);
-        console.log(userPosts);
-      } catch (error) {
-        console.error("An error occurred:", error);
-      }
-    };
-
-    fetchData(); // Call the API function
-  }, []);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -76,6 +50,30 @@ export const UserPosts = () => {
       [name]: value,
     }));
   };
+
+  const fetchData = async () => {
+    const token = localStorage.getItem("token");
+    const url = `https://localhost:7142/api/UserPosts/${token}`;
+
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      // Do something with the fetched data
+      console.log(data);
+      setUserPosts([...data]);
+      console.log(userPosts);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+  useEffect(() => {
+    fetchData(); // Call the API function
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -103,6 +101,28 @@ export const UserPosts = () => {
       }
     } catch (error) {
       console.error("An error occurred:", error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const token = localStorage.getItem("token");
+    const url = `https://localhost:7142/api/UserPosts/${id}`;
+
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        fetchData();
+      } else {
+        throw new Error("Request failed with status " + response.status);
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
 
@@ -135,6 +155,7 @@ export const UserPosts = () => {
           onHide={() => {
             setVisibleForm(false);
             setFormData(new MyPostModel());
+            setMessage("");
           }}
           footer={footerContent}
         >
@@ -181,11 +202,11 @@ export const UserPosts = () => {
             <Card
               title={
                 <div className="cardTitle">
-                  {post.destination}{" "}
+                  <p>{post.destination}</p>
                   <Button
                     icon="pi pi-trash"
                     className="trashButton"
-                    //onClick={handleDelte(post.id)}
+                    onClick={() => handleDelete(post.id)}
                   ></Button>
                 </div>
               }

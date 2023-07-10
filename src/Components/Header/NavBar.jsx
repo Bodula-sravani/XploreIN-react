@@ -14,6 +14,9 @@ export const NavBar = ({
   handleGetItinerary,
   setActiveComponent,
 }) => {
+  const handleReview = () => {
+    setActiveComponent("Reviews");
+  };
   return (
     <>
       <div className="header">
@@ -29,7 +32,9 @@ export const NavBar = ({
               <a href="./HomePage#India">India</a>
             </li>
             <li>
-              <a href="./Homepage#about">About</a>
+              <a href="#" onClick={handleReview}>
+                Reviews
+              </a>
             </li>
             <li>
               <a href="/">Contact</a>
