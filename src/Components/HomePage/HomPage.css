@@ -41,3 +41,14 @@
   justify-content: space-around;
   align-items: center;
 }
+
+.partner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.partner img {
+  width: 30%;
+  height: 30%;
+}
