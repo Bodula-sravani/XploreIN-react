@@ -4,6 +4,9 @@ import { NavBar } from "./Components/Header/NavBar";
 import { HomePage } from "./Components/HomePage/HomePage";
 import { Destination } from "./Components/DisplayDestination/Destination";
 import { Itinerary } from "./Itineraries/Itinerary";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { UserPosts } from "./Components/UserPosts/UserPosts";
+import { Reviews } from "./Components/Reviews/Reviews";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -135,6 +138,8 @@ function App() {
           handleUpdateItinrary={handleUpdateItinrary}
         />
       )}
+      {activeComponent === "UserPosts" && <UserPosts />}
+      {activeComponent === "Reviews" && <Reviews />}
     </>
   );
 }
