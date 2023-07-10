@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Sidebar } from "primereact/sidebar";
 import { Button } from "primereact/button";
 import { Avatar } from "primereact/avatar";
 import { Dialog } from "primereact/dialog";
 import { Divider } from "primereact/divider";
 import { InputText } from "primereact/inputtext";
+import { Link } from "react-router-dom";
+
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "./Profile.css";
-import { fontWeight } from "@mui/system";
 
 class RegisterModel {
   constructor() {
@@ -142,6 +142,11 @@ export const Profile = ({ handleGetItinerary, setActiveComponent }) => {
   };
   const handleLogoutClick = () => {
     handleLogout();
+    setVisibleRight(false);
+  };
+
+  const handlePostsClick = () => {
+    setActiveComponent("UserPosts");
     setVisibleRight(false);
   };
 
@@ -309,20 +314,39 @@ export const Profile = ({ handleGetItinerary, setActiveComponent }) => {
         {visibleRight && (
           <div className="dropdown">
             <ul className="dropdown-menu">
-              <li>{localStorage.getItem("userName")}</li>
+              <li>
+                <i className="pi pi-user listButtons">
+                  <strong>{localStorage.getItem("userName")}</strong>
+                </i>
+              </li>
               <li className="dropdown-item">
-                <button
+                <Button
+                  label="My itineraries"
+                  icon="pi pi-th-large"
+                  className="listButtons"
                   onClick={(e) => {
                     handleGetItinerary(e);
                     setVisibleRight(false);
                   }}
-                >
-                  My itineraries
-                </button>
+                ></Button>
+              </li>
+              <li className="dropdown-item">
+                <Button
+                  label="My Posts"
+                  icon="pi pi-th-large"
+                  className="listButtons"
+                  onClick={handlePostsClick}
+                ></Button>
               </li>
               <hr className="dropdown-divider" />
               <li className="dropdown-item" onClick={handleLogoutClick}>
-                <button onClick={handleLogoutClick}>Log out</button>
+                <Button
+                  label="Log out"
+                  icon="pi pi-sign-out"
+                  className="listButtons"
+                  onClick={handleLogoutClick}
+                ></Button>
+                {/* <button onClick={handleLogoutClick}>Log out</button> */}
               </li>
             </ul>
           </div>

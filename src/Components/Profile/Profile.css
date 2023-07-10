@@ -86,7 +86,7 @@ button:hover {
   color: #212529;
   text-align: left;
   list-style: none;
-  background-color: whitesmoke;
+  background-color: white;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
@@ -97,7 +97,7 @@ button:hover {
 .dropdown-item {
   display: block;
   width: 100%;
-  padding: 0.25rem 1.5rem;
+  /* padding: 0.25rem 1.5rem; */
   clear: both;
   font-weight: 400;
   color: #212529;
@@ -107,9 +107,18 @@ button:hover {
   border: 0;
 }
 
-.dropdown-divider {
+/* .dropdown-divider {
   height: 1px;
   margin: 0.5rem 0;
   overflow: hidden;
   background-color: #e9ecef;
+} */
+
+.listButtons {
+  background: transparent;
+  border: none;
+  color: black;
+  margin: 0;
+}
+.listButtons:hover {
 }
