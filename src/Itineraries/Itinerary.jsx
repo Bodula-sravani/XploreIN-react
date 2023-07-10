@@ -172,9 +172,9 @@ export const Itinerary = ({
   };
 
   return (
-    <div style={{ margin: "70px" }}>
+    <div className="itineraryPage">
       <div className="myFlex titleBar">
-        <h1 style={{ textAlign: "center" }}>Your Trips</h1>
+        <h1 style={{ textAlign: "center", marginTop: "70px" }}>Your Trips</h1>
         <Button
           label="Add"
           onClick={() => {
@@ -182,7 +182,7 @@ export const Itinerary = ({
           }}
           icon="pi pi-plus"
           className="p-button-text"
-          style={{ color: "black" }}
+          style={{ color: "black", marginTop: "70px" }}
         />
         {renderDialog(
           "Lets plan for another TRIP....🎉",
@@ -217,12 +217,15 @@ export const Itinerary = ({
                   <img
                     alt="Card"
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCWOMrdSF3wCnuLdx9v-Elps8-3mbwvpffHg&usqp=CAU"
+                    //src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROX4_-iyyv0Mg0mxUhZHbFbzBf1INoSSJp9yAJbwvapKimRs5Kc0mELQJoAGf4eJaqRTk&usqp=CAU"
+                    //src="https://st5.depositphotos.com/1359043/64614/v/600/depositphotos_646140092-stock-illustration-abstract-plane-hand-line-drawing.jpg"
                     style={{
                       height: "100px",
                       width: "300px",
                       borderRadius: "5px",
                     }}
                   />
+                  {/* <hr /> */}
                   <Button
                     label=""
                     icon="pi pi-trash"
@@ -289,118 +292,3 @@ export const Itinerary = ({
     </div>
   );
 };
-
-{
-  /* <Dialog
-        header="Lets plan for another TRIP....🎉"
-        visible={visibleCreateForm}
-        style={{ width: "50vw" }}
-        onHide={() => {
-          setVisibleCreateForm(false), setFormData(new MyItineraryModel());
-        }}
-        footer={footerContentCreate}
-      >
-        <form className="form">
-          <div className="form-row">
-            <label htmlFor="name">Name:</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              placeholder="Let's give it a crazy name"
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="description">Description:</label>
-            <input
-              type="text"
-              id="description"
-              name="description"
-              value={formData.description}
-              placeholder="Describe it..."
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="start_date">Start Date:</label>
-            <input
-              type="datetime-local"
-              id="start_date"
-              name="start_date"
-              value={formData.start_date}
-              placeholder="Start date"
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="end_date">End Date:</label>
-            <input
-              type="datetime-local"
-              id="end_date"
-              name="end_date"
-              value={formData.end_date}
-              placeholder="End date"
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-        </form>
-      </Dialog>
-      <Dialog
-        header="Edit"
-        visible={visibleUpdateForm}
-        style={{ width: "50vw" }}
-        onHide={() => {
-          setVisibleUpdateForm(false), setFormData(new MyItineraryModel());
-        }}
-        footer={footerContentUpdate}
-      >
-        <form className="form">
-          <div className="form-row">
-            <label htmlFor="name">Name:</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              placeholder="Let's give it a crazy name"
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="description">Description:</label>
-            <input
-              type="text"
-              id="description"
-              name="description"
-              value={formData.description}
-              placeholder="Describe it..."
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="start_date">Start Date:</label>
-            <input
-              type="datetime-local"
-              id="start_date"
-              name="start_date"
-              value={formData.start_date}
-              placeholder="Start date"
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="end_date">End Date:</label>
-            <input
-              type="datetime-local"
-              id="end_date"
-              name="end_date"
-              value={formData.end_date}
-              placeholder="End date"
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-        </form>
-      </Dialog> */
-}

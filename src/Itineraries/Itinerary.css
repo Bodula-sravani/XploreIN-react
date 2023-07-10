@@ -6,7 +6,7 @@
 }
 
 .myFlexItem {
-  margin: 10px;
+  margin: 20px;
 }
 
 .titleBar {
@@ -32,3 +32,9 @@
 .form-row input {
   flex: 1;
 }
+
+/* .itineraryPage {
+  background: url("https://img.freepik.com/premium-photo/abstract-background-balloon-travel-multi-colored-hot-air-balloon-flying-among-white-clouds_407474-1285.jpg");
+  background-size: 100%;
+  background-repeat: repeat;
+} */

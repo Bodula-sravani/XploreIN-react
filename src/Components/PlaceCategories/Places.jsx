@@ -5,12 +5,13 @@ import "slick-carousel/slick/slick-theme.css";
 import mumbai from "../../assets/mumbai.jpg";
 import Hyderabad from "../../assets/Hyderabad.jpg";
 import goa from "../../assets/goa.jpg";
+import chennai from "../../assets/chennai.jpg";
 import newDelhi from "../../assets/newDelhi.jpg";
 
 import "./Places.css";
 
-const places = [mumbai, Hyderabad, goa, mumbai, newDelhi];
-const placesName = ["mumbai", "Hyderabad", "goa", "mumbai", "newDelhi"];
+const places = [mumbai, Hyderabad, chennai, newDelhi, goa];
+const placesName = ["Mumbai", "Hyderabad", "Chennai", "New Delhi", "Goa"];
 export const Places = () => {
   const settings = {
     dots: false,
@@ -32,26 +33,13 @@ export const Places = () => {
             style={{ borderRadius: "10px" }}
           />
         </div>
+        <div className="name-overlay">
+          <p className="name-text">{placesName[index]}</p>
+        </div>
       </div>
     ));
   };
   return (
-    // <div className="root">
-    //   <div className="Places">
-    //     <div className="Place Hillstations">
-    //       <div className="text">Hillstations</div>
-    //     </div>
-    //     <div className="Place Beaches">
-    //       <div className="text">Beaches</div>
-    //     </div>
-    //     <div className="Place Temples">
-    //       <div className="text">Temples</div>
-    //     </div>
-    //     <div className="Place Urban">
-    //       <div className="text">Urban</div>
-    //     </div>
-    //   </div>
-    // </div>
     <div className="flex items-center justify-center myCarousel">
       <div className="w-full">
         <Slider {...settings}>{renderImages()}</Slider>

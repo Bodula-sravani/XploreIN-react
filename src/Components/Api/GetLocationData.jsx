@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import DisplayCard from "../DisplayCardComponent/DisplayCard";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
 export const GetLocationResturants = ({ type, lat, lon }) => {
   const [places, setPlaces] = useState([]);
   useEffect(() => {
@@ -12,7 +11,7 @@ export const GetLocationResturants = ({ type, lat, lon }) => {
         method: "GET",
         headers: {
           "X-RapidAPI-Key":
-            "3c310f413bmsh5a73d047bf06250p1848ebjsn54a086f4e0cf",
+            "fb5824916amsh4004a24127104dbp11ff4fjsn363449964e8e",
           "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
         },
       };
@@ -29,10 +28,6 @@ export const GetLocationResturants = ({ type, lat, lon }) => {
 
     fetchData();
   }, [lat, lon]);
-  console.log("type");
-  console.log(type);
-  console.log("result");
-  console.log(places);
 
   const filteredPlaces = places.filter((place) => {
     return (

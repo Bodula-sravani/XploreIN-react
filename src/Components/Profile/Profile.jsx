@@ -3,9 +3,12 @@ import { Sidebar } from "primereact/sidebar";
 import { Button } from "primereact/button";
 import { Avatar } from "primereact/avatar";
 import { Dialog } from "primereact/dialog";
+import { Divider } from "primereact/divider";
+import { InputText } from "primereact/inputtext";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "./Profile.css";
+import { fontWeight } from "@mui/system";
 
 class RegisterModel {
   constructor() {
@@ -40,13 +43,13 @@ export const Profile = ({ handleGetItinerary, setActiveComponent }) => {
   );
 
   const handleLogin = async (e) => {
+    setMessage("Logging...");
     const url = "https://localhost:7142/api/auth/login";
 
     const loginModel = {
       email,
       password,
     };
-
     try {
       // Send a POST request to the API
       const response = await fetch(url, {
@@ -56,15 +59,21 @@ export const Profile = ({ handleGetItinerary, setActiveComponent }) => {
         },
         body: JSON.stringify(loginModel),
       });
-
       const data = await response.json();
+      console.log(data);
       console.log(data.token);
       localStorage.setItem("token", data.token);
       localStorage.setItem("isLoggedIn", true);
-      setMessage("Login successful!");
+      localStorage.setItem("userName", data.userName);
+      setMessage("Login Successful!!!");
+      setEmail("");
+      setPassword("");
+      setMessage("");
+      setIsLoggedIn(localStorage.getItem("isLoggedIn"));
+      setVisibleLogin(false);
     } catch (error) {
       console.error("Error:", error);
-      setMessage("Login failed. Please try again." + error);
+      setMessage("Login failed. Please try again.");
     }
   };
 
@@ -88,11 +97,14 @@ export const Profile = ({ handleGetItinerary, setActiveComponent }) => {
         if (response.ok) {
           setMessage("Registration successful!");
         } else {
-          throw new Error("Request failed with status " + response.status);
+          const data = await response.json();
+          const errorDescriptions = data.errors;
+          console.log(errorDescriptions);
+          throw new Error(errorDescriptions[0]);
         }
       } catch (error) {
         console.error("Error:", error);
-        setMessage(error);
+        setMessage(error.message);
       }
     } else {
       setMessage("Passwords did not match");
@@ -128,173 +140,194 @@ export const Profile = ({ handleGetItinerary, setActiveComponent }) => {
       // setMessage("Logout failed. Please try again." + error);
     }
   };
-
-  const handlePostsClick = () => {};
   const handleLogoutClick = () => {
     handleLogout();
     setVisibleRight(false);
   };
 
-  const footerContentLogin = (
-    <div>
-      <Button
-        label="Login"
-        onClick={handleLogin}
-        className="p-button-text custom-button-label"
-        style={{ color: "#333" }}
-      />
-    </div>
-  );
-
-  const footerContentRegister = (
-    <div>
-      <Button
-        label="Register"
-        onClick={handleRegister}
-        className="p-button-text custom-button-label"
-        style={{ color: "#333" }}
-      />
-    </div>
-  );
-
   return (
-    <div>
-      {/* <Button icon="pi pi-arrow-left" onClick={() => setVisibleRight(true)} /> */}
-      <Avatar
-        icon="pi pi-user"
-        style={{ backgroundColor: "transparent", color: "black" }}
-        shape="circle"
-        onClick={() => setVisibleRight(true)}
-      />
-      <Sidebar
-        visible={visibleRight}
-        position="right"
-        onHide={() => setVisibleRight(false)}
-      >
-        <ul>
-          {!isLoggedIn && (
-            <li>
-              <div className="card flex justify-content-center">
-                <a href="#" onClick={handleLoginClick}>
-                  Login
-                </a>
-                <Dialog
-                  header="Login"
-                  visible={visibleLogin}
-                  position="center"
-                  style={{ width: "50vw" }}
-                  onHide={() => {
-                    setVisibleLogin(false);
-                    setEmail("");
-                    setPassword("");
-                    setMessage("");
-                    setIsLoggedIn(localStorage.getItem("isLoggedIn")); // Reset the message when the dialog is closed
-                  }}
-                  draggable={false}
-                  resizable={false}
-                  footer={footerContentLogin}
-                >
-                  {message && <p className="message">{message}</p>}
-                  <form
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-evenly",
-                    }}
-                  >
-                    <label id="email">Email</label>
-                    <input
-                      type="email"
-                      placeholder="Enter email"
+    <div className="flex justify-content-center items-center">
+      {!isLoggedIn && (
+        <div className="card flex justify-content-center items-center">
+          <a
+            href="#"
+            onClick={handleLoginClick}
+            style={{
+              fontWeight: "600",
+              color: "black",
+            }}
+          >
+            Login
+          </a>
+          <Dialog
+            header="Login"
+            visible={visibleLogin}
+            position="center"
+            style={{ width: "50vw" }}
+            onHide={() => {
+              setVisibleLogin(false);
+              setEmail("");
+              setPassword("");
+              setMessage("");
+              setIsLoggedIn(localStorage.getItem("isLoggedIn"));
+            }}
+            draggable={false}
+            resizable={false}
+          >
+            {message && <p className="message">{message}</p>}
+            <div className="card">
+              <div className="myLoginFlex">
+                <div className="LoginForm">
+                  <div className="Label">
+                    <label htmlFor="email" className="w-24">
+                      Email
+                    </label>
+                    <InputText
+                      id="username"
+                      type="text"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
-                    <label id="password">Password</label>
-                    <input
+                  </div>
+                  <div className="Label">
+                    <label htmlFor="password" className="w-24">
+                      Password
+                    </label>
+                    <InputText
+                      id="password"
                       type="password"
-                      placeholder="Enter password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
-                  </form>
-                </Dialog>
-              </div>
-            </li>
-          )}
-          {!isLoggedIn && (
-            <li>
-              <div className="card flex justify-content-center">
-                <a href="#" onClick={handleRegisterClick}>
-                  Register
-                </a>
-                <Dialog
-                  header="Register"
-                  visible={visibleRegister}
-                  position="center"
-                  style={{ width: "50vw" }}
-                  onHide={() => {
-                    setVisibleRegister(false);
-                    setEmail("");
-                    setPassword("");
-                    setRepeatPassword("");
-                    setMessage("");
-                    setIsLoggedIn(localStorage.getItem("isLoggedIn")); // Reset the message when the dialog is closed
-                  }}
-                  draggable={false}
-                  resizable={false}
-                  footer={footerContentRegister}
-                >
-                  {message && <p className="message">{message}</p>}
-                  <form
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-evenly",
-                    }}
+                  </div>
+                  <Button
+                    label="Login"
+                    icon="pi pi-user"
+                    className="LoginButton"
+                    onClick={handleLogin}
+                  ></Button>
+                </div>
+                <div className="w-full md:w-2 flex items-center justify-center">
+                  <Divider
+                    layout="vertical"
+                    className="flex md:hidden"
+                    align="center"
                   >
-                    <label id="email">Email</label>
-                    <input
-                      type="email"
-                      placeholder="Enter email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <label id="password">Password</label>
-                    <input
-                      type="password"
-                      placeholder="Enter password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <label id="passwordConfrim">Repeat password</label>
-                    <input
-                      type="password"
-                      placeholder="Confrim password"
-                      value={repeatPassword}
-                      onChange={(e) => setRepeatPassword(e.target.value)}
-                    />
-                  </form>
-                </Dialog>
+                    <b>OR</b>
+                  </Divider>
+                </div>
+                <div className="LoginForm">
+                  <Button
+                    label="Sign Up"
+                    icon="pi pi-user-plus"
+                    className="p-button-success"
+                    onClick={handleRegisterClick}
+                  ></Button>
+                </div>
               </div>
-            </li>
-          )}
-          {isLoggedIn && (
-            <ul>
-              <button
-                onClick={(e) => {
-                  handleGetItinerary(e);
-                  setVisibleRight(false);
-                }}
-              >
-                My itineraries
-              </button>
-              <hr />
-              <button onClick={handleLogoutClick}>Log out</button>
-              <hr />
+            </div>
+          </Dialog>
+        </div>
+      )}
+      <div className="card flex justify-content-center">
+        <Dialog
+          header="Register"
+          visible={visibleRegister}
+          position="center"
+          style={{ width: "50vw" }}
+          onHide={() => {
+            setVisibleRegister(false);
+            setEmail("");
+            setPassword("");
+            setRepeatPassword("");
+            setMessage("");
+            setIsLoggedIn(localStorage.getItem("isLoggedIn"));
+          }}
+          draggable={false}
+          resizable={false}
+        >
+          {message && <p className="message">{message}</p>}
+          <div className="card">
+            <div className="myLoginFlex">
+              <div className="LoginForm">
+                <div className="Label">
+                  <label htmlFor="email" className="w-24">
+                    Email
+                  </label>
+                  <InputText
+                    id="username"
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="Label">
+                  <label htmlFor="password" className="w-24">
+                    Password
+                  </label>
+                  <InputText
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <div className="Label">
+                  <label htmlFor="password" className="w-24">
+                    Confrim Password
+                  </label>
+                  <InputText
+                    id="repeatpassword"
+                    type="password"
+                    value={repeatPassword}
+                    onChange={(e) => setRepeatPassword(e.target.value)}
+                  />
+                </div>
+                <Button
+                  label="Register"
+                  icon="pi pi-user"
+                  className="LoginButton"
+                  onClick={() => {
+                    handleRegister(), setVisibleLogin(false);
+                  }}
+                ></Button>
+              </div>
+            </div>
+          </div>
+        </Dialog>
+      </div>
+      <div>
+        {isLoggedIn && (
+          <div className="avatar-container">
+            <Avatar
+              icon="pi pi-user"
+              shape="circle"
+              onClick={() => setVisibleRight((v) => !v)}
+            />
+          </div>
+        )}
+        {visibleRight && (
+          <div className="dropdown">
+            <ul className="dropdown-menu">
+              <li>{localStorage.getItem("userName")}</li>
+              <li className="dropdown-item">
+                <button
+                  onClick={(e) => {
+                    handleGetItinerary(e);
+                    setVisibleRight(false);
+                  }}
+                >
+                  My itineraries
+                </button>
+              </li>
+              <hr className="dropdown-divider" />
+              <li className="dropdown-item" onClick={handleLogoutClick}>
+                <button onClick={handleLogoutClick}>Log out</button>
+              </li>
             </ul>
-          )}
-        </ul>
-      </Sidebar>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
