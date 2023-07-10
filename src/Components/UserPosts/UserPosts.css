@@ -1,0 +1,48 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-row label {
+  width: 120px;
+  margin-right: 10px;
+}
+
+.form-row input {
+  flex: 1;
+}
+
+.Posts {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 10px;
+}
+
+.postCard {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOuvize8NEazDl_6TGMPBdWVKvHc_xruojwg&usqp=CAU);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.cardTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.trashButton {
+  background: none;
+  color: black;
+  border: none;
+}
