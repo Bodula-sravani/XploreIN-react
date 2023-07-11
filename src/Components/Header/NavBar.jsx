@@ -50,7 +50,7 @@ export const NavBar = ({
               </a>
             </li>
             <li>
-              <a href="/">Contact</a>
+              <a href="./HomePage#Footer">Contact</a>
             </li>
           </ul>
           <div className="lastitem">

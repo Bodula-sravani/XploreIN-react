@@ -3,27 +3,65 @@ import { Typedtext } from "../TextAnimation/Typedtext";
 import { useRef } from "react";
 import { Places } from "../PlaceCategories/Places";
 import { Footer } from "../Footer/Footer";
+import { Button } from "primereact/button";
 import "./HomPage.css";
 
-export const HomePage = () => {
+export const HomePage = ({ setActiveComponent }) => {
   return (
     <div>
       <Typedtext />
-      <div style={{ margin: "20px" }}>
-        <h1>Popular Places</h1>
+      <div className="places">
+        <h1 className="title">Popular Places</h1>
       </div>
       <Places />
       <div id="India">
-        <h1>Our India</h1>
-        <div
-          className="flex justify-center"
-          style={{ width: "100%", height: "100px" }}
-        >
-          Stuff About things in India
+        <h1 className="title">Our India</h1>
+        <div className="aboutIndia">
+          <div className="aboutIndia-row">
+            <div className="image">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGvsFSE57PMvAcW5OKb6OggjPl-V6NwGpyzw&usqp=CAU"
+                alt="Cultural Image"
+              />
+            </div>
+            <p>
+              India is a land of rich heritage and diverse traditions that
+              captivate the hearts of travelers from around the world. From
+              ancient architectural marvels to vibrant cultural festivals, India
+              offers a unique and unforgettable experience.
+            </p>
+          </div>
+          <div className="aboutIndia-row">
+            <p>
+              India's rich cultural heritage extends to its classical music,
+              dance forms, and handicrafts. Traditional art forms like
+              Kathakali, Bharatanatyam, and Odissi mesmerize audiences with
+              their graceful movements and elaborate costumes.
+            </p>
+            <div className="image">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_eCxiQp2d5p02r0cZ0GAQatFecSPQzBJ3yA&usqp=CAU"
+                alt="dances"
+              />
+            </div>
+          </div>
+          <p>
+            <strong>XploreIN</strong> lets you discover this thorugh its rurual
+            Tourism
+          </p>
+          <p>
+            Look some of the places we have in our data and experince{" "}
+            <strong>Rural Tourism</strong> of Inida
+          </p>
+          <Button
+            label="Get Started"
+            className="startedButton"
+            onClick={() => setActiveComponent("Rural Tourism")}
+          />
         </div>
       </div>
       <div className="partners">
-        <h1>Information partners</h1>
+        <h1 className="title">Information partners</h1>
         <p>We get our information from our reliable partners</p>
         <div className="whiteBackground">
           <div className="partner">
@@ -40,7 +78,9 @@ export const HomePage = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <div id="Footer">
+        <Footer />
+      </div>
     </div>
   );
 };
