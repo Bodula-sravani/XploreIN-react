@@ -6,6 +6,7 @@ import { Destination } from "./Components/DisplayDestination/Destination";
 import { Itinerary } from "./Itineraries/Itinerary";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { UserPosts } from "./Components/UserPosts/UserPosts";
+import { RuralIndia } from "./Components/RuralIndia/RuralIndia";
 import { Reviews } from "./Components/Reviews/Reviews";
 
 function App() {
@@ -128,7 +129,9 @@ function App() {
         handleGetItinerary={handleGetItinerary}
         setActiveComponent={setActiveComponent}
       />
-      {activeComponent === "HomePage" && <HomePage />}
+      {activeComponent === "HomePage" && (
+        <HomePage setActiveComponent={setActiveComponent} />
+      )}
       {activeComponent === "Destinantion" && <Destination search={search} />}
       {activeComponent === "Itineraries" && (
         <Itinerary
@@ -140,6 +143,7 @@ function App() {
       )}
       {activeComponent === "UserPosts" && <UserPosts />}
       {activeComponent === "Reviews" && <Reviews />}
+      {activeComponent === "Rural Tourism" && <RuralIndia />}
     </>
   );
 }

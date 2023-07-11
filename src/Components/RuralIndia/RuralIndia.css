@@ -1,0 +1,36 @@
+.ruralIndia {
+  margin-top: 80px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.ruralCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 3px;
+}
+.ruralCard img {
+  width: 400px;
+  height: 300px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.ruralCard a {
+  text-decoration: underline;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.description {
+  margin-top: 10px;
+  font-size: 20px;
+}
