@@ -13,7 +13,10 @@
 .weather-info {
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
 }
+
 .TodayWeather {
   display: flex;
   width: inherit;

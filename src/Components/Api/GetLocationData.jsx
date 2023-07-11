@@ -84,17 +84,5 @@ export const GetLocationResturants = ({ type, lat, lon }) => {
         </Carousel>
       </div>
     </div>
-    // <div className="card">
-    //   <Carousel
-    //     value={displayedPlaces}
-    //     numVisible={3}
-    //     numScroll={3}
-    //     responsiveOptions={responsiveOptions}
-    //     className="custom-carousel"
-    //     circular
-    //     autoplayInterval={3000}
-    //     itemTemplate={DisplayCard}
-    //   />
-    // </div>
   );
 };
