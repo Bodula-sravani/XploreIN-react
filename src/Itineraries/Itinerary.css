@@ -11,14 +11,16 @@ html {
 
 .itineraryPage {
   background: url("https://img.freepik.com/premium-photo/abstract-background-balloon-travel-multi-colored-hot-air-balloon-flying-among-white-clouds_407474-1285.jpg");
-  background-size: 100%;
   background-repeat: repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
 }
 
 .myFlex {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
@@ -79,5 +81,10 @@ html {
 
   .form-row input::placeholder {
     font-size: 12px; /* Decrease the font size of input placeholders for smaller screens */
+  }
+  .itineraryPage {
+    background-size: 100% 100%;
+    background-position: top;
+    height: 100%;
   }
 }
