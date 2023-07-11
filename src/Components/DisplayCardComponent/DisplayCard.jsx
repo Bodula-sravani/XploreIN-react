@@ -71,20 +71,23 @@ import Rating from "@mui/material/Rating";
 
 import useStyles from "./styles.js";
 
-const DisplayCard = ({ key, place }) => {
+const DisplayCard = ({ key, type, place }) => {
   // if (selected)
   //   refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   const classes = useStyles(Card);
-
+  let photoUrl = "";
+  if (type === "attractions") {
+    photoUrl =
+      "https://img.freepik.com/free-vector/madrid-concept-illustration_114360-3213.jpg?size=626&ext=jpg&ga=GA1.2.233956569.1687154958&semt=ais";
+  } else {
+    photoUrl =
+      "https://img.freepik.com/free-vector/hotel-staff-concept-illustration_114360-17168.jpg?size=626&ext=jpg&ga=GA1.1.233956569.1687154958&semt=sph";
+  }
   return (
     <Card elevation={6}>
       <CardMedia
         style={{ height: 350 }}
-        image={
-          place.photo
-            ? place.photo.images.large.url
-            : "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"
-        }
+        image={place.photo ? place.photo.images.large.url : photoUrl}
         title={place.name}
       />
       <CardContent>
@@ -97,12 +100,14 @@ const DisplayCard = ({ key, place }) => {
             {place.num_reviews} review{place.num_reviews > 1 && "s"}
           </Typography>
         </Box>
-        <Box display="flex" justifyContent="space-between">
-          <Typography component="legend">Price</Typography>
-          <Typography gutterBottom variant="subtitle1">
-            {place.price_level}
-          </Typography>
-        </Box>
+        {type !== "attractions" && (
+          <Box display="flex" justifyContent="space-between">
+            <Typography component="legend">Price</Typography>
+            <Typography gutterBottom variant="subtitle1">
+              {place.price_level}
+            </Typography>
+          </Box>
+        )}
         <Box display="flex" justifyContent="space-between">
           <Typography component="legend">Ranking</Typography>
           <Typography gutterBottom variant="subtitle1">

@@ -4,9 +4,10 @@ import { useRef } from "react";
 import { Places } from "../PlaceCategories/Places";
 import { Footer } from "../Footer/Footer";
 import { Button } from "primereact/button";
+import { Link } from "react-router-dom";
 import "./HomPage.css";
 
-export const HomePage = ({ setActiveComponent }) => {
+export const HomePage = () => {
   return (
     <div>
       <Typedtext />
@@ -14,7 +15,7 @@ export const HomePage = ({ setActiveComponent }) => {
         <h1 className="title">Popular Places</h1>
       </div>
       <Places />
-      <div id="India">
+      <div>
         <h1 className="title">Our India</h1>
         <div className="aboutIndia">
           <div className="aboutIndia-row">
@@ -53,11 +54,13 @@ export const HomePage = ({ setActiveComponent }) => {
             Look some of the places we have in our data and experince{" "}
             <strong>Rural Tourism</strong> of Inida
           </p>
-          <Button
-            label="Get Started"
-            className="startedButton"
-            onClick={() => setActiveComponent("Rural Tourism")}
-          />
+          <Link to="/ruraltourism">
+            <Button
+              label="Get Started"
+              className="startedButton"
+              // onClick={() => setActiveComponent("Rural Tourism")}
+            />
+          </Link>
         </div>
       </div>
       <div className="partners">

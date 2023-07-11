@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
@@ -36,16 +36,13 @@ class MyItineraryModel {
   }
 }
 
-export const Itinerary = ({
-  data,
-  handlePostItinerary,
-  handleDeleteItinrary,
-  handleUpdateItinrary,
-}) => {
+export const Itinerary = () => {
   const [visibleCreateForm, setVisibleCreateForm] = useState(false);
   const [formData, setFormData] = useState(new MyItineraryModel());
   const [visibleUpdateForm, setVisibleUpdateForm] = useState(false);
   const [visibleDelete, setVisibleDelete] = useState(false);
+  const [itineraryData, setItineraryData] = useState(null);
+  const [message, setMessage] = useState("");
 
   const footerContentCreate = (
     <div>
@@ -74,10 +71,13 @@ export const Itinerary = ({
         visible={visible}
         style={{ width: "50vw" }}
         onHide={() => {
-          setVisible(false), setFormData(new MyItineraryModel());
+          setVisible(false),
+            setMessage(""),
+            setFormData(new MyItineraryModel());
         }}
         footer={footer}
       >
+        {message && <p>{message}</p>}
         <form className="form">
           <div className="form-row">
             <label htmlFor="name">Name:</label>
@@ -126,6 +126,110 @@ export const Itinerary = ({
         </form>
       </Dialog>
     );
+  };
+
+  const handleGetItinerary = async () => {
+    const token = localStorage.getItem("token");
+    const url = "https://localhost:7142/api/UserItineraries";
+
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setItineraryData([...data]);
+        console.log(data);
+      } else {
+        throw new Error("Request failed with status " + response.status);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    handleGetItinerary();
+  }, []);
+
+  const handlePostItinerary = async (ItineraryModel) => {
+    const url = "https://localhost:7142/api/UserItineraries";
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(ItineraryModel),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setMessage("Created Successfully");
+        handleGetItinerary();
+      } else {
+        throw new Error("Request failed with status " + response.status);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleDeleteItinrary = async (id) => {
+    const url = `https://localhost:7142/api/UserItineraries/${id}`;
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        //const data = await response.json();
+        handleGetItinerary();
+        // console.log(data);
+      } else {
+        throw new Error("Request failed with status " + response.status);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleUpdateItinrary = async (ItineraryModel) => {
+    const url = `https://localhost:7142/api/UserItineraries/${ItineraryModel.id}`;
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(ItineraryModel),
+      });
+
+      if (response.ok) {
+        // const data = await response.json();
+        // console.log(data);
+        setMessage("Updated Successfully");
+        handleGetItinerary();
+      } else {
+        throw new Error("Request failed with status " + response.status);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const handleCreate = () => {
@@ -193,101 +297,104 @@ export const Itinerary = ({
       </div>
       <hr></hr>
       <div className="myFlex">
-        {data.map((d) => (
-          <div
-            key={d.id}
-            className="card flex justify-content-center myFlexItem"
-          >
-            <Card
-              title={d.name}
-              subTitle={
-                <div>
-                  <p style={{ fontSize: "15px", fontWeight: "normal" }}>
-                    <strong>Start: </strong>
-                    {d.start_date.split("T")[0]}
-                  </p>
-                  <p style={{ fontSize: "15px", fontWeight: "normal" }}>
-                    <strong>End: </strong>
-                    {d.end_date.split("T")[0]}
-                  </p>
-                </div>
-              }
-              header={
-                <div style={{ position: "relative", display: "inline-block" }}>
-                  <img
-                    alt="Card"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCWOMrdSF3wCnuLdx9v-Elps8-3mbwvpffHg&usqp=CAU"
-                    //src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROX4_-iyyv0Mg0mxUhZHbFbzBf1INoSSJp9yAJbwvapKimRs5Kc0mELQJoAGf4eJaqRTk&usqp=CAU"
-                    //src="https://st5.depositphotos.com/1359043/64614/v/600/depositphotos_646140092-stock-illustration-abstract-plane-hand-line-drawing.jpg"
-                    style={{
-                      height: "100px",
-                      width: "300px",
-                      borderRadius: "5px",
-                    }}
-                  />
-                  {/* <hr /> */}
-                  <Button
-                    label=""
-                    icon="pi pi-trash"
-                    onClick={() => setVisibleDelete(true)}
-                    className="p-button-text"
-                    style={{
-                      position: "absolute",
-                      top: "0",
-                      right: "0",
-                      margin: "5px",
-                      color: "black",
-                    }}
-                  />
-                  <Button
-                    label=""
-                    icon="pi pi-pencil"
-                    onClick={() => handleUpdateClick(d.id)}
-                    className="p-button-text"
-                    style={{
-                      position: "absolute",
-                      top: "0",
-                      left: "0",
-                      margin: "5px",
-                      color: "black",
-                    }}
-                  />
-                </div>
-              }
-              className="md:w-25rem"
-              style={{ height: "300px", width: "300px" }}
+        {itineraryData &&
+          itineraryData.map((d) => (
+            <div
+              key={d.id}
+              className="card flex justify-content-center myFlexItem"
             >
-              <Dialog
-                header="Confirm Delete?"
-                visible={visibleDelete}
-                style={{ width: "50vw" }}
-                onHide={() => setVisibleDelete(false)}
+              <Card
+                title={d.name}
+                subTitle={
+                  <div>
+                    <p style={{ fontSize: "15px", fontWeight: "normal" }}>
+                      <strong>Start: </strong>
+                      {d.start_date.split("T")[0]}
+                    </p>
+                    <p style={{ fontSize: "15px", fontWeight: "normal" }}>
+                      <strong>End: </strong>
+                      {d.end_date.split("T")[0]}
+                    </p>
+                  </div>
+                }
+                header={
+                  <div
+                    style={{ position: "relative", display: "inline-block" }}
+                  >
+                    <img
+                      alt="Card"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCWOMrdSF3wCnuLdx9v-Elps8-3mbwvpffHg&usqp=CAU"
+                      //src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROX4_-iyyv0Mg0mxUhZHbFbzBf1INoSSJp9yAJbwvapKimRs5Kc0mELQJoAGf4eJaqRTk&usqp=CAU"
+                      //src="https://st5.depositphotos.com/1359043/64614/v/600/depositphotos_646140092-stock-illustration-abstract-plane-hand-line-drawing.jpg"
+                      style={{
+                        height: "100px",
+                        width: "300px",
+                        borderRadius: "5px",
+                      }}
+                    />
+                    {/* <hr /> */}
+                    <Button
+                      label=""
+                      icon="pi pi-trash"
+                      onClick={() => setVisibleDelete(true)}
+                      className="p-button-text"
+                      style={{
+                        position: "absolute",
+                        top: "0",
+                        right: "0",
+                        margin: "5px",
+                        color: "black",
+                      }}
+                    />
+                    <Button
+                      label=""
+                      icon="pi pi-pencil"
+                      onClick={() => handleUpdateClick(d.id)}
+                      className="p-button-text"
+                      style={{
+                        position: "absolute",
+                        top: "0",
+                        left: "0",
+                        margin: "5px",
+                        color: "black",
+                      }}
+                    />
+                  </div>
+                }
+                className="md:w-25rem"
+                style={{ height: "300px", width: "300px" }}
               >
-                <Button
-                  label="Yes"
-                  onClick={() => {
-                    handleDeleteItinrary(d.id), setVisibleDelete(false);
-                  }}
-                  className="p-button-danger"
-                />
-                {/* <Button
+                <Dialog
+                  header="Confirm Delete?"
+                  visible={visibleDelete}
+                  style={{ width: "50vw" }}
+                  onHide={() => setVisibleDelete(false)}
+                >
+                  <Button
+                    label="Yes"
+                    onClick={() => {
+                      handleDeleteItinrary(d.id), setVisibleDelete(false);
+                    }}
+                    className="p-button-danger"
+                  />
+                  {/* <Button
                   label="No"
                   onClick={() => setVisibleDelete(false)}
                   className="p-button-warning"
                   icon="pi pi-wrong"
                 /> */}
-              </Dialog>
+                </Dialog>
 
-              {renderDialog(
-                "Edit",
-                footerContentUpdate,
-                visibleUpdateForm,
-                setVisibleUpdateForm
-              )}
-              <p>{d.description}</p>
-            </Card>
-          </div>
-        ))}
+                {renderDialog(
+                  "Edit",
+                  footerContentUpdate,
+                  visibleUpdateForm,
+                  setVisibleUpdateForm
+                )}
+                <p>{d.description}</p>
+              </Card>
+            </div>
+          ))}
       </div>
     </div>
   );

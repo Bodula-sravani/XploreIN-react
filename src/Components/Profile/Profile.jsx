@@ -5,7 +5,6 @@ import { Dialog } from "primereact/dialog";
 import { Divider } from "primereact/divider";
 import { InputText } from "primereact/inputtext";
 import { Link } from "react-router-dom";
-
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "./Profile.css";
@@ -29,7 +28,7 @@ class RegisterModel {
     this.accessFailedCount = 0;
   }
 }
-export const Profile = ({ handleGetItinerary, setActiveComponent }) => {
+export const Profile = ({ setActiveComponent }) => {
   const [visibleRight, setVisibleRight] = useState(false);
   const [visibleLogin, setVisibleLogin] = useState(false);
   const [visibleRegister, setVisibleRegister] = useState(false);
@@ -132,7 +131,7 @@ export const Profile = ({ handleGetItinerary, setActiveComponent }) => {
       localStorage.removeItem("token");
       localStorage.removeItem("isLoggedIn");
       setIsLoggedIn(false);
-      setActiveComponent("HomePage");
+      //setActiveComponent("HomePage");
       // Display a message indicating successful logout
       // setMessage("Logout successful!");
     } catch (error) {
@@ -142,11 +141,6 @@ export const Profile = ({ handleGetItinerary, setActiveComponent }) => {
   };
   const handleLogoutClick = () => {
     handleLogout();
-    setVisibleRight(false);
-  };
-
-  const handlePostsClick = () => {
-    setActiveComponent("UserPosts");
     setVisibleRight(false);
   };
 
@@ -320,32 +314,35 @@ export const Profile = ({ handleGetItinerary, setActiveComponent }) => {
                 </i>
               </li>
               <li className="dropdown-item">
-                <Button
-                  label="My itineraries"
-                  icon="pi pi-th-large"
-                  className="listButtons"
-                  onClick={(e) => {
-                    handleGetItinerary(e);
-                    setVisibleRight(false);
-                  }}
-                ></Button>
+                <Link to="/itineraries">
+                  <Button
+                    label="My Itineraries"
+                    icon="pi pi-th-large"
+                    className="listButtons"
+                    onClick={() => setVisibleRight(false)}
+                  />
+                </Link>
               </li>
               <li className="dropdown-item">
-                <Button
-                  label="My Posts"
-                  icon="pi pi-th-large"
-                  className="listButtons"
-                  onClick={handlePostsClick}
-                ></Button>
+                <Link to="/userposts">
+                  <Button
+                    label="My Posts"
+                    icon="pi pi-th-large"
+                    className="listButtons"
+                    onClick={() => setVisibleRight(false)}
+                  ></Button>
+                </Link>
               </li>
               <hr className="dropdown-divider" />
               <li className="dropdown-item" onClick={handleLogoutClick}>
-                <Button
-                  label="Log out"
-                  icon="pi pi-sign-out"
-                  className="listButtons"
-                  onClick={handleLogoutClick}
-                ></Button>
+                <Link to="/">
+                  <Button
+                    label="Log out"
+                    icon="pi pi-sign-out"
+                    className="listButtons"
+                    onClick={handleLogoutClick}
+                  ></Button>
+                </Link>
                 {/* <button onClick={handleLogoutClick}>Log out</button> */}
               </li>
             </ul>
