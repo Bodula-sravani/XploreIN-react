@@ -1,3 +1,20 @@
+/* html,
+body {
+  height: 100%;
+}
+
+html {
+  background: url("https://img.freepik.com/premium-photo/abstract-background-balloon-travel-multi-colored-hot-air-balloon-flying-among-white-clouds_407474-1285.jpg");
+  background-size: 100% 100%;
+  background-repeat: repeat;
+} */
+
+.itineraryPage {
+  background: url("https://img.freepik.com/premium-photo/abstract-background-balloon-travel-multi-colored-hot-air-balloon-flying-among-white-clouds_407474-1285.jpg");
+  background-size: 100%;
+  background-repeat: repeat;
+}
+
 .myFlex {
   display: flex;
   flex-direction: row;
@@ -33,16 +50,20 @@
   flex: 1;
 }
 
-.itineraryPage {
-  background: url("https://img.freepik.com/premium-photo/abstract-background-balloon-travel-multi-colored-hot-air-balloon-flying-among-white-clouds_407474-1285.jpg");
-  background-size: 100%;
-  background-repeat: repeat;
-}
-
 @media (max-width: 768px) {
-  .myFlexItem {
-    flex-basis: 100%;
+  .myFlex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
+
+  .titleBar {
+    justify-content: space-between;
+  }
+
+  /* .myFlexItem {
+    flex-basis: 100%;
+  } */
 
   .form-row label {
     width: auto;

@@ -57,9 +57,6 @@
   border: solid 1px black;
   color: black;
 }
-.searchButton:hover {
-  background: transparent;
-}
 
 .lastitem ul {
   display: flex;
@@ -70,50 +67,6 @@
 li {
   padding: 0 0.2rem;
 }
-
-/* @media screen and (max-width: 1240px) {
-  .nav-menu {
-    position: absolute;
-    flex-direction: column;
-    justify-content: start;
-    top: 90px;
-    right: -100%;
-    width: 50%;
-    height: 100vh;
-    transition: 0.4s;
-    z-index: 2;
-    background: rgb(0, 0, 0);
-    border-left: 1px solid #eee;
-  }
-
-  .nav-menu.active {
-    right: 0;
-  }
-
-  .nav-menu li {
-    padding: 1rem;
-    width: 100%;
-    border-bottom: 1px solid #eee;
-  }
-
-  .nav-menu a {
-    font-size: 1.2rem;
-  }
-
-  .message {
-    text-align: center;
-    color: black;
-    font-size: 10px;
-    color: #ef8686;
-  }
-
-  .custom-button-label {
-    color: black;
-  }
-  .p-inputgroup {
-    width: 100px;
-  }
-} */
 
 @media screen and (max-width: 768px) {
   .header .container {
