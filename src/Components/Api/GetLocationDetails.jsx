@@ -36,7 +36,7 @@ export const GetLocationData = ({ location, setLocationData }) => {
         method: "GET",
         headers: {
           "X-RapidAPI-Key":
-            "fb5824916amsh4004a24127104dbp11ff4fjsn363449964e8e",
+            "75df3e2e49msh5b598745780934bp1b21a2jsn3bf0d9f05b1a",
           "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
         },
       };
@@ -172,9 +172,6 @@ export const GetLocationData = ({ location, setLocationData }) => {
           visible={visible}
           style={{
             width: "50vw",
-            background: new URL(
-              "https://t4.ftcdn.net/jpg/04/97/80/99/360_F_497809944_FMo3DO6j7XSlb9rZKOlnqaaWoJhuZXBm.jpg"
-            ),
           }}
           onHide={() => setVisible(false)}
         >

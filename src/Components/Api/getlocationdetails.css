@@ -9,3 +9,44 @@
   left: 50%;
   text-align: center;
 }
+
+.weather-info {
+  display: flex;
+  flex-direction: column;
+}
+.TodayWeather {
+  display: flex;
+  width: inherit;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.weather-icon {
+  width: 100px;
+  height: 100px;
+  border: 5%;
+  border-radius: solid 1px black;
+  margin: 0 auto; /* Add this line to center the image */
+}
+
+.temperature,
+.description {
+  font-size: 20px;
+  font-weight: 400;
+  color: black;
+}
+
+.location {
+  font-size: 20px;
+  font-weight: 1000;
+  color: black;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.forecast-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}

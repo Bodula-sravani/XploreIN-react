@@ -11,7 +11,7 @@ export const GetLocationResturants = ({ type, lat, lon }) => {
         method: "GET",
         headers: {
           "X-RapidAPI-Key":
-            "fb5824916amsh4004a24127104dbp11ff4fjsn363449964e8e",
+            "75df3e2e49msh5b598745780934bp1b21a2jsn3bf0d9f05b1a",
           "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
         },
       };
@@ -72,12 +72,13 @@ export const GetLocationResturants = ({ type, lat, lon }) => {
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div style={{ width: "700px", height: "700px" }}>
         <Carousel
+          key={type}
           showThumbs={false}
           style={{ width: "700px", height: "700px !important" }}
         >
           {displayedPlaces.map((place) => (
             <div key={place.id}>
-              <DisplayCard place={place} />
+              <DisplayCard type={type} place={place} />
             </div>
           ))}
         </Carousel>
