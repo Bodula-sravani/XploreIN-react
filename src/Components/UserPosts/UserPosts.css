@@ -35,6 +35,8 @@
   background-repeat: no-repeat;
   background-size: cover;
   color: black;
+  width: 400px;
+  height: 200px;
 }
 
 .cardTitle {
@@ -47,4 +49,10 @@
   background: none;
   color: black;
   border: none;
+}
+
+@media (max-width: 768px) {
+  .Posts {
+    justify-content: center;
+  }
 }
