@@ -15,15 +15,19 @@ export const HomePage = () => {
         <h1 className="title">Popular Places</h1>
       </div>
       <Places />
+      <hr></hr>
       <div>
-        <h1 className="title">Our India</h1>
+        <h1 className="title">Rural Tourism</h1>
         <div className="aboutIndia">
           <div className="aboutIndia-row">
-            <div className="image">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGvsFSE57PMvAcW5OKb6OggjPl-V6NwGpyzw&usqp=CAU"
-                alt="Cultural Image"
-              />
+            <div class="video">
+              <video
+                src="https://cdn.pixabay.com/vimeo/337668424/taj-mahal-23592.mp4?width=640&hash=f63182dba5dd5b8c181668fa79a634aeff2fc1fd"
+                controls
+                autoPlay
+                loop
+                muted
+              ></video>
             </div>
             <p>
               India is a land of rich heritage and diverse traditions that
@@ -39,30 +43,35 @@ export const HomePage = () => {
               Kathakali, Bharatanatyam, and Odissi mesmerize audiences with
               their graceful movements and elaborate costumes.
             </p>
-            <div className="image">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_eCxiQp2d5p02r0cZ0GAQatFecSPQzBJ3yA&usqp=CAU"
-                alt="dances"
-              />
+            <div class="video">
+              <video
+                src="https://player.vimeo.com/external/414627656.sd.mp4?s=ba761d720fd3c3dab5fc0df3167d28b254a5b56e&profile_id=164&oauth2_token_id=57447761"
+                controls
+                autoPlay
+                loop
+                muted
+              ></video>
             </div>
           </div>
           <p>
-            <strong>XploreIN</strong> lets you discover this thorugh its rurual
-            Tourism
+            <strong>XploreIN</strong> lets you discover this thorugh Indias
+            rurual Tourism
           </p>
           <p>
-            Look some of the places we have in our data and experince{" "}
+            Look at some of the places we have in our collection and experince{" "}
             <strong>Rural Tourism</strong> of Inida
           </p>
-          <Link to="/ruraltourism">
-            <Button
-              label="Get Started"
-              className="startedButton"
-              // onClick={() => setActiveComponent("Rural Tourism")}
-            />
+          <Link
+            to="/ruraltourism"
+            onClick={() => {
+              window.scrollTo(0, 0);
+            }}
+          >
+            <Button label="Get Started" className="startedButton" />
           </Link>
         </div>
       </div>
+      <hr></hr>
       <div className="partners">
         <h1 className="title">Information partners</h1>
         <p>We get our information from our reliable partners</p>
@@ -87,18 +96,3 @@ export const HomePage = () => {
     </div>
   );
 };
-
-{
-  /* <h1>About Us</h1>
-      <div id="about">
-        <div className="Motto">
-          Our motto is Simple
-          <br />
-          India is a place full of heritage, traditions and culture
-          <br />
-          Embracing the origins of it and enjoy its beauty
-          <br /> Come Join us And XploreIN
-        </div>
-        <div className="MottoImage"></div>
-      </div> */
-}
