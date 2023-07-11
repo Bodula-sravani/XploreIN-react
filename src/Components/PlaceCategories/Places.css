@@ -1,10 +1,11 @@
-.myCarousel {
-}
-
 .imageStyle {
   border-radius: 10px;
   width: 300px;
   height: 150px;
+}
+.custom-prev-arrow::before,
+.custom-next-arrow::before {
+  color: black !important;
 }
 
 .custom-prev-arrow,
@@ -12,6 +13,7 @@
   width: 40px;
   height: 40px;
   /* background-color: gray; */
+  color: #000;
   opacity: 0.5;
   position: absolute;
   top: 50%;
@@ -28,17 +30,55 @@
   right: 10px;
 }
 
-@media (max-width: 768px) {
-  .myCarousel {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
+/* .slide-item {
+  position: relative;
+} */
 
-  .imageStyle {
-    max-width: 100%;
-    max-height: 200px;
-    margin-right: 0; /* Remove margin between images on smaller screens */
-    margin-bottom: 20px; /* Add a margin-bottom for vertical spacing */
+.image-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.imageStyle {
+  width: 300px;
+  height: 150px;
+  object-fit: cover;
+  align-self: center;
+}
+
+.name-overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.name-text {
+  color: #000;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+@media (max-width: 1024px) {
+  .myCarousel .w-full .slick-slide {
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .myCarousel .w-full .slick-slide {
+    width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .myCarousel .slick-slide {
+    width: 100px;
   }
 }
