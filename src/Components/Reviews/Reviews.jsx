@@ -5,29 +5,36 @@ import "./Reviews.css";
 
 export const Reviews = () => {
   const [reviews, setReviews] = useState(null);
+  const [message, setMessage] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
+      try {
+        const url = "https://localhost:7142/api/UserPosts";
 
-      const url = "https://localhost:7142/api/UserPosts";
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      //   if (response.status === "ok") {
-      const data = await response.json();
-      setReviews([...data]);
-      console.log(data);
+        //   if (response.status === "ok") {
+        const data = await response.json();
+        setReviews([...data]);
+        console.log(data);
+      } catch (error) {
+        setMessage("Please Login to View the Reviews");
+      }
       //   }
     };
     fetchData();
   }, []);
+  console.log(message);
+  console.log(reviews);
   return (
     <div className="reviews">
+      {!reviews && <p>{message}</p>}
       {reviews &&
         reviews.map((r) => (
           <Card

@@ -107,7 +107,7 @@ export const Places = () => {
           <img src={place} className="object-cover h-48 rounded imageStyle" />
           <div className="name-overlay">
             <p className="name-text">{placesName[index]}</p>
-            <p className="name-text">{placesDescription[index]}</p>
+            <p className="name-text">"{placesDescription[index]}"</p>
           </div>
         </div>
       </div>

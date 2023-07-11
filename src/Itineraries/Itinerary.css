@@ -33,8 +33,30 @@
   flex: 1;
 }
 
-/* .itineraryPage {
+.itineraryPage {
   background: url("https://img.freepik.com/premium-photo/abstract-background-balloon-travel-multi-colored-hot-air-balloon-flying-among-white-clouds_407474-1285.jpg");
   background-size: 100%;
   background-repeat: repeat;
-} */
+}
+
+@media (max-width: 768px) {
+  .myFlexItem {
+    flex-basis: 100%;
+  }
+
+  .form-row label {
+    width: auto;
+    margin-right: 0;
+    margin-bottom: 5px;
+    font-size: 12px; /* Decrease the font size of labels further for smaller screens */
+  }
+
+  .form-row input {
+    width: 100%;
+    font-size: 12px; /* Decrease the font size of input text further for smaller screens */
+  }
+
+  .form-row input::placeholder {
+    font-size: 12px; /* Decrease the font size of input placeholders for smaller screens */
+  }
+}
