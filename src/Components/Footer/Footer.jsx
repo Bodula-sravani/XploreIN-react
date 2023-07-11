@@ -10,8 +10,10 @@ export const Footer = () => {
           <div className="footer-column">
             <h4>About XploreIN</h4>
             <p>
-              XploreIN is a travel website dedicated to helping travelers
-              discover new destinations and plan their perfect trips.
+              <strong>XploreIN</strong> motto is simple
+              <br />
+              We want to enrich the beauty of India and its diverse things
+              <br /> Come join us and XploreIN
             </p>
           </div>
           <div className="footer-column">

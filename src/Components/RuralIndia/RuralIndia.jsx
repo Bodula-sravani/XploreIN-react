@@ -57,7 +57,7 @@ export const RuralIndia = () => {
               <Card className="ruralCard">
                 <h2 className="title">
                   <a href={r.link} target="_blank">
-                    <li>{r.title}</li>
+                    {r.title}
                   </a>
                 </h2>
                 <div className="imageContainer">
@@ -68,6 +68,10 @@ export const RuralIndia = () => {
             );
           })}
         </ol>
+        <p>
+          These are some of the Places we gathered. More interesting places are
+          coming soon
+        </p>
       </div>
     </>
   );
