@@ -42,6 +42,8 @@ export const UserPosts = () => {
   const [formData, setFormData] = useState(new MyPostModel());
   const [userPosts, setUserPosts] = useState(null);
   const [message, setMessage] = useState("");
+  const [destinationError, setDestinationError] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -78,6 +80,18 @@ export const UserPosts = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
+    if (formData.description.trim() === "") {
+      setDescriptionError("Descritpion is required");
+    } else {
+      // Submit the form or perform any other action
+      setDescriptionError("");
+    }
+    if (formData.destination.trim() === "") {
+      setDestinationError("Destination is required");
+    } else {
+      // Submit the form or perform any other action
+      setDestinationError("");
+    }
 
     try {
       const response = await fetch("https://localhost:7142/api/UserPosts", {
@@ -156,10 +170,14 @@ export const UserPosts = () => {
             setVisibleForm(false);
             setFormData(new MyPostModel());
             setMessage("");
+            setDescriptionError("");
+            setDestinationError("");
           }}
           footer={footerContent}
         >
           {message && <p>{message}</p>}
+          {descriptionError && <p>{descriptionError}</p>}
+          {destinationError && <p>{destinationError}</p>}
           <form className="form">
             <div className="p-field form-row">
               <label htmlFor="destination">Destination</label>
@@ -196,6 +214,7 @@ export const UserPosts = () => {
         </Dialog>
       </div>
       <hr></hr>
+      {userPosts && userPosts.length === 0 && <p>No reviews posted by you</p>}
       <div className="Posts">
         {userPosts &&
           userPosts.map((post) => (

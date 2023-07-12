@@ -43,6 +43,7 @@ export const Itinerary = () => {
   const [visibleDelete, setVisibleDelete] = useState(false);
   const [itineraryData, setItineraryData] = useState(null);
   const [message, setMessage] = useState("");
+  const [nameError, setNameError] = useState("");
 
   const footerContentCreate = (
     <div>
@@ -74,10 +75,12 @@ export const Itinerary = () => {
           setVisible(false),
             setMessage(""),
             setFormData(new MyItineraryModel());
+          setNameError("");
         }}
         footer={footer}
       >
         {message && <p>{message}</p>}
+        {nameError && <p>{nameError}</p>}
         <form className="form">
           <div className="form-row">
             <label htmlFor="name">Name:</label>
@@ -87,6 +90,7 @@ export const Itinerary = () => {
               name="name"
               value={formData.name}
               placeholder="Let's give it a crazy name"
+              required
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -98,6 +102,7 @@ export const Itinerary = () => {
               name="description"
               value={formData.description}
               placeholder="Describe it..."
+              required
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -109,6 +114,7 @@ export const Itinerary = () => {
               name="start_date"
               value={formData.start_date}
               placeholder="Start date"
+              required
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -120,6 +126,7 @@ export const Itinerary = () => {
               name="end_date"
               value={formData.end_date}
               placeholder="End date"
+              required
               onChange={(e) => handleChange(e)}
             />
           </div>
@@ -234,6 +241,12 @@ export const Itinerary = () => {
 
   const handleCreate = () => {
     console.log(formData);
+    if (formData.name.trim() === "") {
+      setNameError("Name is required");
+    } else {
+      // Submit the form or perform any other action
+      setNameError("");
+    }
     handlePostItinerary(formData);
   };
 
@@ -296,6 +309,9 @@ export const Itinerary = () => {
         )}
       </div>
       <hr></hr>
+      {itineraryData && itineraryData.length === 0 && (
+        <p>No itinerary data available.</p>
+      )}
       <div className="myFlex">
         {itineraryData &&
           itineraryData.map((d) => (
