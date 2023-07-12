@@ -8,6 +8,7 @@ import { Itinerary } from "./Itineraries/Itinerary";
 import { UserPosts } from "./Components/UserPosts/UserPosts";
 import { RuralIndia } from "./Components/RuralIndia/RuralIndia";
 import { Reviews } from "./Components/Reviews/Reviews";
+import { Favourites } from "./Components/Favourites/Favourites";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -38,6 +39,7 @@ function App() {
         <Route path="/userposts" element={<UserPosts />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/ruraltourism" element={<RuralIndia />} />
+        <Route path="/favourites" element={<Favourites />} />
       </Routes>
     </Router>
   );

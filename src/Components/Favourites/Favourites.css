@@ -1,0 +1,29 @@
+.customCard {
+  width: 300px;
+}
+
+.customHeader {
+  height: 200px;
+}
+
+.headerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.cardContent {
+  padding: 1rem;
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.trashButton {
+  font-size: 1.5rem;
+  color: red;
+}
