@@ -1,0 +1,47 @@
+.carousel .control-dots .dot {
+  width: 10px;
+  height: 10px;
+  background-color: #5c5b59;
+  box-shadow: none;
+}
+
+/* .myCarousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+.carousel.carousel-slider .control-arrow {
+  top: 40%;
+  height: 10vh;
+  background-color: #515150;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.imageStyle {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.name-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+.name-text {
+  margin: 0;
+  font-size: 14px;
+  color: white;
+}
