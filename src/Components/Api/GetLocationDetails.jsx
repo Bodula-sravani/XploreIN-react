@@ -16,11 +16,37 @@ import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
+import { Loader1 } from "../Loader/Loader1";
+
+class MyFavoriteModel {
+  constructor() {
+    this.id = 0;
+    this.placeName = "";
+    this.photoUrl = "";
+    this.userId = "string";
+    this.user = {
+      id: "string",
+      userName: "string",
+      normalizedUserName: "string",
+      email: "string",
+      normalizedEmail: "string",
+      emailConfirmed: true,
+      passwordHash: "string",
+      securityStamp: "string",
+      concurrencyStamp: "string",
+      phoneNumber: "string",
+      phoneNumberConfirmed: true,
+      twoFactorEnabled: true,
+      lockoutEnd: "2023-07-10T12:18:00.671Z",
+      lockoutEnabled: true,
+      accessFailedCount: 0,
+    };
+  }
+}
 
 export const GetLocationData = ({ location, setLocationData }) => {
   const [dataFetched, setDataFetched] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
   const [visible, setVisible] = useState(false);
   const [search, setSearch] = useState(location);
   const [temp, setTemperature] = useState(0);
@@ -28,7 +54,6 @@ export const GetLocationData = ({ location, setLocationData }) => {
   const [icon, setIcon] = useState(null);
   const [forecasts, setForecasts] = useState([]);
   const classes = useStyles(Card);
-  console.log("location: " + location);
   useEffect(() => {
     const fetchData = async () => {
       const url = `https://travel-advisor.p.rapidapi.com/locations/auto-complete?query=${location}&lang=en_US&units=km`;
@@ -76,11 +101,9 @@ export const GetLocationData = ({ location, setLocationData }) => {
           longitude,
         });
 
-        console.log("data fectehc");
-        console.log(dataFetched);
-
         setLocationData({ name, latitude, longitude });
         setIsLoading(false);
+        console.log("invoked api");
       } catch (error) {
         console.error(error);
       }
@@ -108,8 +131,6 @@ export const GetLocationData = ({ location, setLocationData }) => {
           const filteredForecasts = data2.list.filter(
             (item, index) => index % 8 === 0
           );
-          console.log("Thsi is from wather doata");
-          console.log(data2);
           setForecasts([...filteredForecasts]);
         } catch (error) {
           console.log("An error occurred:", error);
@@ -126,8 +147,98 @@ export const GetLocationData = ({ location, setLocationData }) => {
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     return days[date.getDay()];
   };
+
+  const [favFormData, setFavFormData] = useState(new MyFavoriteModel());
+  const [favData, setFavData] = useState(null);
+  const [isFavorited, setIsFavorited] = useState(false);
+  const [favId, setFavId] = useState(null);
+
+  const getFav = async () => {
+    const token = localStorage.getItem("token");
+    const url = "https://localhost:7142/api/UserFavorites";
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      setFavData([...data]);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  useEffect(() => {
+    getFav();
+  }, []);
+
+  useEffect(() => {
+    if (favData && dataFetched) {
+      for (let i = 0; i < favData.length; i++) {
+        if (favData[i].placeName === dataFetched.name) {
+          setIsFavorited(true);
+          setFavId(favData[i].id);
+        }
+      }
+    }
+  }, [favData, dataFetched]);
+
+  const handleFavClick = async (name, photo) => {
+    const token = localStorage.getItem("token");
+    const url = "https://localhost:7142/api/UserFavorites";
+    setFavFormData((prevData) => ({
+      ...prevData,
+      placeName: name,
+      photoUrl: photo,
+    }));
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(favFormData),
+      });
+      if (response.ok) {
+        setIsFavorited(true);
+        getFav();
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const token = localStorage.getItem("token");
+    const url = `https://localhost:7142/api/UserFavorites/${id}`;
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        getFav();
+        setIsFavorited(false);
+      } else {
+        throw new Error("Request failed with status " + response.status);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   if (isLoading) {
-    return <div className="locationdetail">Loading...</div>;
+    return (
+      <div className="load1Center">
+        <Loader1 />
+      </div>
+    );
   } else {
     return (
       <Card className={classes.card}>
@@ -165,6 +276,20 @@ export const GetLocationData = ({ location, setLocationData }) => {
                 color: "black",
               }}
             />
+            {favData && dataFetched && (
+              <Button
+                icon={isFavorited ? "pi pi-heart-fill" : "pi pi-heart"}
+                className="favButton"
+                onClick={() => {
+                  isFavorited
+                    ? handleDelete(favId)
+                    : handleFavClick(
+                        dataFetched.name,
+                        dataFetched.photo.images.small.url
+                      );
+                }}
+              ></Button>
+            )}
           </Grid>
         </CardActions>
         <Dialog

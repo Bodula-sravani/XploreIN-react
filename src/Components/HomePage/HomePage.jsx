@@ -5,6 +5,7 @@ import { Places } from "../PlaceCategories/Places";
 import { Footer } from "../Footer/Footer";
 import { Button } from "primereact/button";
 import { Link } from "react-router-dom";
+import { Products } from "../Carousel/Carousel";
 import "./HomPage.css";
 
 export const HomePage = () => {
@@ -14,13 +15,13 @@ export const HomePage = () => {
       <div className="places">
         <h1 className="title">Popular Places</h1>
       </div>
-      <Places />
+      <Products />
       <hr></hr>
       <div>
         <h1 className="title">Rural Tourism</h1>
         <div className="aboutIndia">
           <div className="aboutIndia-row">
-            <div class="video">
+            <div className="video">
               <video
                 src="https://cdn.pixabay.com/vimeo/337668424/taj-mahal-23592.mp4?width=640&hash=f63182dba5dd5b8c181668fa79a634aeff2fc1fd"
                 controls
@@ -43,7 +44,7 @@ export const HomePage = () => {
               Kathakali, Bharatanatyam, and Odissi mesmerize audiences with
               their graceful movements and elaborate costumes.
             </p>
-            <div class="video">
+            <div className="video">
               <video
                 src="https://player.vimeo.com/external/414627656.sd.mp4?s=ba761d720fd3c3dab5fc0df3167d28b254a5b56e&profile_id=164&oauth2_token_id=57447761"
                 controls

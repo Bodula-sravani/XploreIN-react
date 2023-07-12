@@ -8,6 +8,7 @@ import { FileUpload } from "primereact/fileupload";
 import { InputText } from "primereact/inputtext";
 import { Card } from "primereact/card";
 import "./UserPosts.css";
+import { Loader1 } from "../Loader/Loader1";
 
 class MyPostModel {
   constructor() {
@@ -216,6 +217,7 @@ export const UserPosts = () => {
       <hr></hr>
       {userPosts && userPosts.length === 0 && <p>No reviews posted by you</p>}
       <div className="Posts">
+        {!userPosts && <Loader1 />}
         {userPosts &&
           userPosts.map((post) => (
             <Card

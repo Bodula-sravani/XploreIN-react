@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "primereact/card";
 import { Rating } from "primereact/Rating";
+import { Loader1 } from "../../Components/Loader/Loader1";
 import "./Reviews.css";
 
 export const Reviews = () => {
@@ -22,7 +23,7 @@ export const Reviews = () => {
         setReviews([...data]);
         console.log(data);
       } catch (error) {
-        setMessage("Please Login to View the Reviews");
+        // setMessage("Please Login to View the Reviews");
       }
     };
     fetchData();
@@ -33,6 +34,7 @@ export const Reviews = () => {
     <div className="head">
       <h1 className="title">User Reviews</h1>
       <div className="reviews">
+        {!reviews && <Loader1 />}
         {!reviews && <p>{message}</p>}
         {reviews &&
           reviews.map((r) => (

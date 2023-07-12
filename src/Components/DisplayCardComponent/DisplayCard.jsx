@@ -86,7 +86,7 @@ const DisplayCard = ({ key, type, place }) => {
   return (
     <Card elevation={6}>
       <CardMedia
-        style={{ height: 350 }}
+        style={{ height: 200 }}
         image={place.photo ? place.photo.images.large.url : photoUrl}
         title={place.name}
       />

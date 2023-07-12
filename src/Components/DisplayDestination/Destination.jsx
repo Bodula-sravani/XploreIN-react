@@ -5,17 +5,17 @@ import { GetLocationResturants } from "../Api/GetLocationData";
 export const Destination = () => {
   const [locationData, setLocationData] = useState(null);
   const types = ["restaurants", "attractions", "hotels"];
+  //, "attractions", "hotels"];
   const search = new URLSearchParams(location.search).get("search");
-  console.log("serahc:" + search);
   return (
     <>
-      <div style={{ marginTop: "80px" }}></div>
+      <div style={{ marginTop: "70px" }}></div>
       <GetLocationData location={search} setLocationData={setLocationData} />
-      <hr />
+      {/* <hr /> */}
       {locationData
         ? types.map((type) => (
             <Fragment key={type}>
-              <p>{type.toUpperCase()}</p>
+              <h1 className="title">{type.toUpperCase()}</h1>
               <GetLocationResturants
                 type={type}
                 lat={locationData.latitude}

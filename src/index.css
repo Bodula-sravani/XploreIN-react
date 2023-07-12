@@ -127,6 +127,10 @@ code {
   color: var(--primary);
 }
 
+/* body {
+  background: linear-gradient(to bottom, silver, white, #673ab7);
+} */
+
 * {
   margin: 0;
   padding: 0;

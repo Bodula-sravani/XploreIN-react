@@ -106,3 +106,8 @@ button:hover {
   color: black;
   margin: 0;
 }
+
+.nonClickable {
+  pointer-events: none;
+  cursor: default;
+}

@@ -6,6 +6,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "./Itinerary.css";
+import { Loader1 } from "../Components/Loader/Loader1";
 
 class MyItineraryModel {
   constructor() {
@@ -313,6 +314,7 @@ export const Itinerary = () => {
         <p>No itinerary data available.</p>
       )}
       <div className="myFlex">
+        {!itineraryData && <Loader1 />}
         {itineraryData &&
           itineraryData.map((d) => (
             <div

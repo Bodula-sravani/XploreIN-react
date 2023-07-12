@@ -309,9 +309,13 @@ export const Profile = ({ setActiveComponent }) => {
           <div className="dropdown">
             <ul className="dropdown-menu">
               <li>
-                <i className="pi pi-user listButtons">
-                  <strong>{localStorage.getItem("userName")}</strong>
-                </i>
+                <Button
+                  label={localStorage.getItem("userName")}
+                  icon="pi pi-user"
+                  className="listButtons nonClickable"
+                  disabled
+                  // onClick={() => setVisibleRight(false)}
+                />
               </li>
               <li className="dropdown-item">
                 <Link to="/itineraries">
@@ -333,7 +337,16 @@ export const Profile = ({ setActiveComponent }) => {
                   ></Button>
                 </Link>
               </li>
-              <hr className="dropdown-divider" />
+              <li className="dropdown-item">
+                <Link to="/favourites">
+                  <Button
+                    label="My Favourites"
+                    icon="pi pi-heart"
+                    className="listButtons"
+                    onClick={() => setVisibleRight(false)}
+                  ></Button>
+                </Link>
+              </li>
               <li className="dropdown-item" onClick={handleLogoutClick}>
                 <Link to="/">
                   <Button
