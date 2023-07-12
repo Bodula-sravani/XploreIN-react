@@ -53,12 +53,16 @@ export const Reviews = () => {
               <p></p>
             </Card>
           ))}
+        {reviews && (
+          <div>
+            <hr></hr>
+            <p>
+              These are the user experiences about their trips. More features to
+              be added soon...
+            </p>
+          </div>
+        )}
       </div>
-      <hr></hr>
-      <p>
-        These are some of the user experiences about their trips. More features
-        to be added soon...
-      </p>
     </div>
   );
 };
