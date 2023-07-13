@@ -23,7 +23,7 @@ export const Reviews = () => {
         setReviews([...data]);
         console.log(data);
       } catch (error) {
-        // setMessage("Please Login to View the Reviews");
+        setMessage("Please Login to View the Reviews");
       }
     };
     fetchData();

@@ -1,7 +1,5 @@
 import React from "react";
 import { Typedtext } from "../TextAnimation/Typedtext";
-import { useRef } from "react";
-import { Places } from "../PlaceCategories/Places";
 import { Footer } from "../Footer/Footer";
 import { Button } from "primereact/button";
 import { Link } from "react-router-dom";

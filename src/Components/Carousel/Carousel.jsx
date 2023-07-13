@@ -1,18 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { CarouselCard } from "../../Components/Carousel/CarouselCard";
-import mumbai from "../../assets/mumbai.jpg";
-import Hyderabad from "../../assets/Hyderabad.jpg";
-import goa from "../../assets/goa.jpg";
-import chennai from "../../assets/chennai.jpg";
-import newDelhi from "../../assets/newDelhi.jpg";
-import jaipur from "../../assets/jaipur.jpg";
-import Agra from "../../assets/Agra.jpg";
-import udaipur from "../../assets/udaipur.jpg";
-import kerela from "../../assets/kerela.jpg";
-import varanasi from "../../assets/varanasi.jpg";
-import shimla from "../../assets/shimla.jpg";
-import amritsar from "../../assets/amritsar.jpg";
-import mysore from "../../assets/mysore.jpg";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./Carousel.css";

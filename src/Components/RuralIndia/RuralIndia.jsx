@@ -68,9 +68,8 @@ export const RuralIndia = () => {
             );
           })}
         </ol>
-        <p>
-          These are some of the Places we gathered. More interesting places are
-          coming soon
+        <p style={{ fontSize: "3rem" }}>
+          More interesting places are coming soon
         </p>
       </div>
     </>
