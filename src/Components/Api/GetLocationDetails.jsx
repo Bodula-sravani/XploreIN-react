@@ -276,7 +276,7 @@ export const GetLocationData = ({ location, setLocationData }) => {
                 color: "black",
               }}
             />
-            {favData && dataFetched && (
+            {favData && dataFetched && localStorage.getItem("isLoggedIn") && (
               <Button
                 icon={isFavorited ? "pi pi-heart-fill" : "pi pi-heart"}
                 className="favButton"
@@ -309,7 +309,7 @@ export const GetLocationData = ({ location, setLocationData }) => {
               />
               <div className="temperature">{temp}°C</div>
               <div className="description">{description}</div>
-              <div className="location">{location}</div>
+              <div className="location">{dataFetched.name}</div>
             </div>
             <div className="forecast-container">
               {forecasts.map((forecast) => (

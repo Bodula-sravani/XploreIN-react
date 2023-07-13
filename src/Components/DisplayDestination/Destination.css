@@ -1,0 +1,10 @@
+.buttonList {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: transparent;
+  flex-wrap: wrap;
+  color: black;
+  width: 100%;
+}
