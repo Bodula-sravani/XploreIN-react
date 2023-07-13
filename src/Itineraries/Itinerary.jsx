@@ -7,6 +7,7 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "./Itinerary.css";
 import { Loader1 } from "../Components/Loader/Loader1";
+import { Link } from "react-router-dom";
 
 class MyItineraryModel {
   constructor() {
@@ -45,6 +46,7 @@ export const Itinerary = () => {
   const [itineraryData, setItineraryData] = useState(null);
   const [message, setMessage] = useState("");
   const [nameError, setNameError] = useState("");
+  const [isEndDateValid, setIsEndDateValid] = useState(false);
 
   const footerContentCreate = (
     <div>
@@ -65,6 +67,26 @@ export const Itinerary = () => {
       />
     </div>
   );
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleEndDateChange = (event) => {
+    const endDate = event.target.value;
+    const startDate = formData.start_date;
+    setIsEndDateValid(startDate < endDate);
+    if (isEndDateValid) {
+      setFormData((prevValues) => ({
+        ...prevValues,
+        end_date: endDate,
+      }));
+    }
+  };
 
   const renderDialog = (header, footer, visible, setVisible) => {
     return (
@@ -114,6 +136,7 @@ export const Itinerary = () => {
               id="start_date"
               name="start_date"
               value={formData.start_date}
+              min={new Date().toISOString()}
               placeholder="Start date"
               required
               onChange={(e) => handleChange(e)}
@@ -126,9 +149,10 @@ export const Itinerary = () => {
               id="end_date"
               name="end_date"
               value={formData.end_date}
+              min={formData.start_date}
               placeholder="End date"
               required
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleEndDateChange(e)}
             />
           </div>
         </form>
@@ -164,6 +188,31 @@ export const Itinerary = () => {
     handleGetItinerary();
   }, []);
 
+  const handlePostItineraryItem = async (ItineraryItemModel) => {
+    const url = "https://localhost:7142/api/ItineraryItems";
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(ItineraryItemModel),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      } else {
+        throw new Error("Request failed with status " + response.status);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   const handlePostItinerary = async (ItineraryModel) => {
     const url = "https://localhost:7142/api/UserItineraries";
     const token = localStorage.getItem("token");
@@ -182,7 +231,26 @@ export const Itinerary = () => {
         const data = await response.json();
         console.log(data);
         setMessage("Created Successfully");
-        handleGetItinerary();
+
+        await handleGetItinerary();
+        // Generate itinerary items
+        const startDate = new Date(ItineraryModel.start_date);
+        const endDate = new Date(ItineraryModel.end_date);
+        const itineraryId = data.id;
+
+        while (startDate <= endDate) {
+          const itineraryItemModel = {
+            title: "Title",
+            description: "Description",
+            date: startDate.toISOString(),
+            todos: "[]",
+            itineraryId: itineraryId,
+            userItineraries: data,
+          };
+
+          await handlePostItineraryItem(itineraryItemModel); // Call API to create itinerary item
+          startDate.setDate(startDate.getDate() + 1); // Increment date by 1 day
+        }
       } else {
         throw new Error("Request failed with status " + response.status);
       }
@@ -228,8 +296,6 @@ export const Itinerary = () => {
       });
 
       if (response.ok) {
-        // const data = await response.json();
-        // console.log(data);
         setMessage("Updated Successfully");
         handleGetItinerary();
       } else {
@@ -254,14 +320,6 @@ export const Itinerary = () => {
   const handleEdit = () => {
     console.log(formData);
     handleUpdateItinrary(formData);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
   };
 
   const handleUpdateClick = async (id) => {
@@ -289,6 +347,71 @@ export const Itinerary = () => {
     }
   };
 
+  const cardHeader = (d) => {
+    //event.stopPropagation();
+    return (
+      <div style={{ position: "relative", display: "inline-block" }}>
+        <img
+          alt="Card"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCWOMrdSF3wCnuLdx9v-Elps8-3mbwvpffHg&usqp=CAU"
+          //src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROX4_-iyyv0Mg0mxUhZHbFbzBf1INoSSJp9yAJbwvapKimRs5Kc0mELQJoAGf4eJaqRTk&usqp=CAU"
+          //src="https://st5.depositphotos.com/1359043/64614/v/600/depositphotos_646140092-stock-illustration-abstract-plane-hand-line-drawing.jpg"
+          style={{
+            height: "100px",
+            width: "300px",
+            borderRadius: "5px",
+          }}
+        />
+        {/* <hr /> */}
+        <div className="button-container">
+          <Button
+            label=""
+            icon="pi pi-trash"
+            onClick={(e) => {
+              e.preventDefault();
+              setVisibleDelete(true);
+            }}
+            className="p-button-text"
+            style={{
+              position: "absolute",
+              top: "0",
+              right: "0",
+              margin: "5px",
+              color: "black",
+            }}
+          />
+          {/* <Link
+            to={`/ItineraryItem/${d.id}`}
+            style={{
+              position: "absolute",
+              top: "0",
+              left: "1",
+              margin: "5px",
+              color: "black",
+            }}
+          >
+            Open
+          </Link> */}
+          <Button
+            label=""
+            icon="pi pi-pencil"
+            onClick={(e) => {
+              // e.preventDefault();
+              handleUpdateClick(d.id);
+            }}
+            className="p-button-text"
+            style={{
+              position: "absolute",
+              top: "0",
+              left: "0",
+              margin: "5px",
+              color: "black",
+            }}
+          />
+        </div>
+      </div>
+    );
+  };
   return (
     <div className="itineraryPage">
       <div className="myFlex titleBar">
@@ -335,52 +458,8 @@ export const Itinerary = () => {
                     </p>
                   </div>
                 }
-                header={
-                  <div
-                    style={{ position: "relative", display: "inline-block" }}
-                  >
-                    <img
-                      alt="Card"
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCWOMrdSF3wCnuLdx9v-Elps8-3mbwvpffHg&usqp=CAU"
-                      //src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROX4_-iyyv0Mg0mxUhZHbFbzBf1INoSSJp9yAJbwvapKimRs5Kc0mELQJoAGf4eJaqRTk&usqp=CAU"
-                      //src="https://st5.depositphotos.com/1359043/64614/v/600/depositphotos_646140092-stock-illustration-abstract-plane-hand-line-drawing.jpg"
-                      style={{
-                        height: "100px",
-                        width: "300px",
-                        borderRadius: "5px",
-                      }}
-                    />
-                    {/* <hr /> */}
-                    <Button
-                      label=""
-                      icon="pi pi-trash"
-                      onClick={() => setVisibleDelete(true)}
-                      className="p-button-text"
-                      style={{
-                        position: "absolute",
-                        top: "0",
-                        right: "0",
-                        margin: "5px",
-                        color: "black",
-                      }}
-                    />
-                    <Button
-                      label=""
-                      icon="pi pi-pencil"
-                      onClick={() => handleUpdateClick(d.id)}
-                      className="p-button-text"
-                      style={{
-                        position: "absolute",
-                        top: "0",
-                        left: "0",
-                        margin: "5px",
-                        color: "black",
-                      }}
-                    />
-                  </div>
-                }
-                className="md:w-25rem"
-                style={{ height: "300px", width: "300px" }}
+                header={() => cardHeader(d)}
+                className="md:w-25rem itineraryCard"
               >
                 <Dialog
                   header="Confirm Delete?"
@@ -396,20 +475,25 @@ export const Itinerary = () => {
                     className="p-button-danger"
                   />
                   {/* <Button
-                  label="No"
-                  onClick={() => setVisibleDelete(false)}
-                  className="p-button-warning"
-                  icon="pi pi-wrong"
-                /> */}
+                    label="No"
+                    onClick={() => setVisibleDelete(false)}
+                    className="p-button-warning"
+                    icon="pi pi-wrong"
+                  /> */}
                 </Dialog>
-
                 {renderDialog(
                   "Edit",
                   footerContentUpdate,
                   visibleUpdateForm,
                   setVisibleUpdateForm
                 )}
-                <p>{d.description}</p>
+                <Link
+                  to={`/ItineraryItem/${d.id}?name=${encodeURIComponent(
+                    d.name
+                  )}`}
+                >
+                  <p>{d.description}</p>
+                </Link>
               </Card>
             </div>
           ))}

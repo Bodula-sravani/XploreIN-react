@@ -52,6 +52,22 @@ html {
   flex: 1;
 }
 
+.itineraryCard {
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  height: "300px";
+  width: "300px";
+  transition: all 0.5s;
+}
+
+.itineraryCard:hover {
+  border: 1px solid black;
+  transform: scale(1.05);
+}
+
+.itineraryCard:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
 @media (max-width: 768px) {
   .myFlex {
     display: flex;
