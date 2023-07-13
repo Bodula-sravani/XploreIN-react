@@ -9,6 +9,7 @@ import { UserPosts } from "./Components/UserPosts/UserPosts";
 import { RuralIndia } from "./Components/RuralIndia/RuralIndia";
 import { Reviews } from "./Components/Reviews/Reviews";
 import { Favourites } from "./Components/Favourites/Favourites";
+import { ItineraryItem } from "./Itineraries/ItineraryItem";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -40,6 +41,7 @@ function App() {
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/ruraltourism" element={<RuralIndia />} />
         <Route path="/favourites" element={<Favourites />} />
+        <Route path="/ItineraryItem/:id" element={<ItineraryItem />} />
       </Routes>
     </Router>
   );

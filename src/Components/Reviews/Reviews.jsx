@@ -42,7 +42,12 @@ export const Reviews = () => {
               title={
                 <div className="CardTitle">
                   <div className="userBar">
-                    <i className="pi pi-user"></i>
+                    <i className="circle">
+                      <img
+                        className="circle"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQezTJNezTs00LEX4uen9LhodNnE-cwv8iCsuEIOTcEjTfVRoa2u4Qi8bVPtPO2IgKnZC4&usqp=CAU"
+                      />
+                    </i>
                     <p>{r.user.userName}</p>
                   </div>
                   {r.destination}
@@ -52,7 +57,6 @@ export const Reviews = () => {
               className="Card"
             >
               <p>{r.description}</p>
-              <p></p>
             </Card>
           ))}
         {reviews && (

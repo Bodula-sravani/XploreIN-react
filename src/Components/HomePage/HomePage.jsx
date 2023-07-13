@@ -55,7 +55,7 @@ export const HomePage = () => {
             </div>
           </div>
           <p>
-            <strong>XploreIN</strong> lets you discover this thorugh Indias
+            <strong>XploreIN</strong> lets you discover this through India's
             rurual Tourism
           </p>
           <p>
