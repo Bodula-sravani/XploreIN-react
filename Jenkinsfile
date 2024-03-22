@@ -24,7 +24,7 @@ pipeline {
                     // run gitleaks
                     sh '''
                         echo $PWD
-                        gitleaks detect --source . -v > $PWD/Git-Leaks_Scan_Result.json 2>&1
+                        (gitleaks detect --source . -v > $PWD/Git-Leaks_Scan_Result.json &)
                         echo "after gitleaks"
                         cat $PWD/Git-Leaks_Scan_Result.json
                         echo "after cat"
