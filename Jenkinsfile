@@ -10,8 +10,8 @@ pipeline {
                         curl -sL https://github.com/gitleaks/gitleaks/releases/download/v8.18.2/gitleaks_8.18.2_linux_x64.tar.gz -o gitleaks.tar.gz
                         gzip -d gitleaks.tar.gz && tar xvf gitleaks.tar
                         chmod +x gitleaks
-                        sudo su
-                        mv gitleaks /usr/local/bin/gitleaks
+                        
+                        sudo mv gitleaks /usr/local/bin/gitleaks
                         rm LICENSE README.md gitleaks.tar
                     '''
                 }
