@@ -25,8 +25,11 @@ pipeline {
                     sh '''
                         echo $PWD
                         gitleaks detect --source . -v > $PWD/Git-Leaks_Scan_Result.json
+                        echo "after gitleaks"
                         cat $PWD/Git-Leaks_Scan_Result.json
+                        echo "after cat"
                         aws s3 cp Git-Leaks_Scan_Result.json s3://secops-results/Results/
+                        echo "after aws s3 cp"
                     '''
                 }
             }
