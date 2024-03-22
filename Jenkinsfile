@@ -59,10 +59,4 @@ pipeline {
         }
         
     }
-    
-    post {
-        success {
-            // Archive artifacts or any other post-build actions
-        }
-    }
 }
