@@ -36,7 +36,6 @@ pipeline {
                 script {
                     // Clone repository and run gitleaks
                     sh '''
-                        sudo su
                         echo $PWD
                         gitleaks detect --source . -v > $PWD/Git-Leaks_Scan_Result.json
                         echo "completed the scan" 
