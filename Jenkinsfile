@@ -36,8 +36,9 @@ pipeline {
                 script {
                     // Clone repository and run gitleaks
                     sh '''
-                        // git clone codecommit::$REGION://$Repository
-                        // cd $Repository
+                        #git clone codecommit::$REGION://$Repository
+                        #cd $Repository
+                        sudo su
                         gitleaks detect --source . -v > $PWD/Git-Leaks_Scan_Result.json 
                         cat $PWD/Git-Leaks_Scan_Result.json
                         ls -l
