@@ -18,18 +18,18 @@ pipeline {
             }
         }
         
-        stage('Set up AWS') {
-            steps {
-                script {
-                    // Configure AWS and Git
-                    sh '''
-                        aws configure set default.region $REGION
-                        // git config --global credential.helper '!aws codecommit credential-helper $@'
-                        // git config --global credential.UseHttpPath true
-                    '''
-                }
-            }
-        }
+        // stage('Set up AWS') {
+        //     steps {
+        //         script {
+        //             // Configure AWS and Git
+        //             sh '''
+        //                 aws configure set default.region $REGION
+        //                 // git config --global credential.helper '!aws codecommit credential-helper $@'
+        //                 // git config --global credential.UseHttpPath true
+        //             '''
+        //         }
+        //     }
+        // }
         
         stage('Scan repository for secrets') {
             steps {
