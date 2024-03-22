@@ -41,7 +41,7 @@ pipeline {
                         gitleaks detect --source . -v > $PWD/Git-Leaks_Scan_Result.json 
                         cat $PWD/Git-Leaks_Scan_Result.json
                         ls -l
-                        aws s3 cp $PWD/Git-Leaks_Scan_Result.json s3://secops-results/Results/
+                        aws s3 cp Git-Leaks_Scan_Result.json s3://secops-results/Results/
                     '''
                 }
             }
