@@ -23,10 +23,17 @@ pipeline {
                 script {
                     // run gitleaks
                     sh '''
-                        wait gitleaks detect --source . -v > $PWD/Git-Leaks_Scan_Result.json &
-                        echo "Gitleaks finished. Starting aws s3 cp"
-                        # Now that gitleaks is finished, copy the file to S3
-                        aws s3 cp Git-Leaks_Scan_Result.json s3://secops-results/Results/
+                        # Run gitleaks and wait for it to finish
+                        gitleaks detect --source . -v > $PWD/Git-Leaks_Scan_Result.json
+                        GITLEAKS_EXIT_CODE=$?  # Save the exit code of gitleaks command
+
+                        if [ $GITLEAKS_EXIT_CODE -eq 0 ]; then
+                            echo "Gitleaks finished successfully. Starting aws s3 cp"
+                            aws s3 cp Git-Leaks_Scan_Result.json s3://secops-results/Results/
+                        else
+                            echo "Gitleaks failed with exit code $GITLEAKS_EXIT_CODE"
+                            # Handle the failure gracefully, if needed
+                        fi
                     '''
                 }
             }
