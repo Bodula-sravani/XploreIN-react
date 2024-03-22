@@ -23,13 +23,14 @@ pipeline {
                 script {
                     // run gitleaks
                     sh '''
-                        echo $PWD
-                        gitleaks detect --source . -v > $PWD/Git-Leaks_Scan_Result.json
-                        echo "after gitleaks"
-                        cat $PWD/Git-Leaks_Scan_Result.json
-                        echo "after cat"
+                        gitleaks detect --source . -v > $PWD/Git-Leaks_Scan_Result.json &
+                        GITLEAKS_PID=$!
+                        wait $GITLEAKS_PID
+
+                        echo "Gitleaks finished. Starting aws s3 cp"
+
+                        # Now that gitleaks is finished, copy the file to S3
                         aws s3 cp Git-Leaks_Scan_Result.json s3://secops-results/Results/
-                        echo "after aws s3 cp"
                     '''
                 }
             }
