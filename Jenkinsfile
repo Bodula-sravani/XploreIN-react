@@ -38,7 +38,8 @@ pipeline {
                     sh '''
                         sudo su
                         echo $PWD
-                        gitleaks detect --source . -v > $PWD/Git-Leaks_Scan_Result.json 
+                        gitleaks detect --source . -v > $PWD/Git-Leaks_Scan_Result.json
+                        echo "completed the scan" 
                         cat $PWD/Git-Leaks_Scan_Result.json
                         ls -l
                         aws s3 cp Git-Leaks_Scan_Result.json s3://secops-results/Results/
